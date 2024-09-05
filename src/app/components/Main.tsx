@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { BackgroundImageOverlay } from "./BackgroundImageOverlay";
 
 export const Main: React.FC = () => {
   const [downloadsPath, setDownloadsPath] = React.useState<string | null>(null);
@@ -17,10 +18,6 @@ export const Main: React.FC = () => {
 
 
   return (
-    <div>
-      <h1>React App</h1>
-
-      <img src="image://alaska.png" alt="" />
-    </div>
+    <BackgroundImageOverlay backgroundImageUrl="image://alaska.png" />
   );
 }   

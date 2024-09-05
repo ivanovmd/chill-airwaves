@@ -1,12 +1,17 @@
 import React from "react";
 
 
-const Scene = () => {
+import { FC, ReactNode } from 'react';
+
+type SceneLayerProps = {
+  children: ReactNode;
+  name?: string;
+};
+
+export const SceneLayer: FC<SceneLayerProps> = ({ children, name }) => {
   return (
-    <div>
-      <h1>Scene</h1>
+    <div data-name={name || 'unnamed'} className="absolute inset-0">
+      {children}
     </div>
   );
 }
-
-export default Scene;
