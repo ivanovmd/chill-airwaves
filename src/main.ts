@@ -1,5 +1,11 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, protocol } from 'electron';
 import path from 'path';
+import { config } from 'dotenv';
+import { imageProtocol } from './electron-protocols/imageProtocol';
+
+
+config({ path: path.join(__dirname, '../.env') });
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -29,6 +35,8 @@ const createWindow = () => {
   ipcMain.handle('get-downloads-path', () => {
     return path.join(app.getPath('downloads'));
   });
+
+  protocol.handle('image', imageProtocol)
 };
 
 // This method will be called when Electron has finished
@@ -52,6 +60,8 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.

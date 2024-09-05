@@ -20,7 +20,7 @@ export const Main: React.FC = () => {
     <div>
       <h1>React App</h1>
 
-      <img src={getImageSrc(downloadsPath)} alt="" />
+      <img src="image://alaska.png" alt="" />
     </div>
   );
 }   
