@@ -10,7 +10,7 @@ interface BackgroundImageOverlayProps {
 export const BackgroundImageOverlay: React.FC<BackgroundImageOverlayProps> = ({ children, backgroundImageUrl }) => {
   return (
     <SceneLayer name="background-image-overlay">
-      <img className="absolute inset-0 w-full h-full object-cover object-center" src={backgroundImageUrl} alt="" />
+      <img className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" src={backgroundImageUrl} alt="" />
       {children}
     </SceneLayer>
   );
