@@ -26,7 +26,7 @@ const loadYoutubeIrfameAPI = (): Promise<void> => {
   });
 }
 
-const createYoutubePlayer = (onPlayerReady: CallableFunction, onPlayerStateChange: CallableFunction) => {
+const createYoutubePlayer = (onPlayerReady: CallableFunction, onPlayerStateChange?: CallableFunction) => {
   return new Promise((resolve, reject) => {
     const player = new window.YT.Player('youtube-player', {
       height: '390',
@@ -62,11 +62,8 @@ export const MusicPlayer = () => {
   }
 
   const onPlayerStateChange = (event: any) => {
-    console.log(event.data);
 
     if (event.data === -1) {
-      console.log(youtubePlayer?.getPlaylist());
-
       console.log(youtubePlayer?.getVideoUrl())
     }
   }
@@ -75,23 +72,23 @@ export const MusicPlayer = () => {
     async function createYoutubeIframe() {
       await loadYoutubeIrfameAPI()
       window.onYouTubeIframeAPIReady = async () => {
-        const youtubePlayer = await createYoutubePlayer(onPlayerReady, onPlayerStateChange)
+        const youtubePlayer: any = await createYoutubePlayer(onPlayerReady)
         setYoutubePlayer(youtubePlayer);
       }
     }
-
     createYoutubeIframe()
 
     return () => {
       youtubePlayer?.destroy();
+      youtubePlayer?.removeEventListener('onStateChange', onPlayerStateChange)
     }
   }, []);
 
   useEffect(() => {
     if (youtubePlayer) {
-      //console.log(youtubePlayer);
       youtubePlayer.setShuffle(true);
       youtubePlayer.nextVideo()
+      youtubePlayer.addEventListener('onStateChange', onPlayerStateChange)
     }
   }, [youtubePlayer]);
 
