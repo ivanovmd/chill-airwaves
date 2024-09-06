@@ -1,7 +1,4 @@
-import React from "react";
-
-
-import { FC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 type SceneLayerProps = {
   children: ReactNode;
@@ -10,7 +7,7 @@ type SceneLayerProps = {
 
 export const SceneLayer: FC<SceneLayerProps> = ({ children, name }) => {
   return (
-    <div data-name={name || 'unnamed'} className="absolute inset-0">
+    <div data-name={name || 'unnamed'} className="absolute inset-0 z-0">
       {children}
     </div>
   );

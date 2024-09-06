@@ -1,10 +1,24 @@
-import { app, BrowserWindow, ipcMain, protocol } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, protocol } from 'electron';
 import path from 'path';
 import { config } from 'dotenv';
 import { imageProtocol } from './electron-protocols/imageProtocol';
-
+import os from 'os';
 
 config({ path: path.join(__dirname, '../.env') });
+
+const isMac = os.platform() === "darwin";
+const isWindows = os.platform() === "win32";
+const isLinux = os.platform() === "linux";
+
+const APP_PROTOCOL = 'chill-airwaves';
+
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    app.setAsDefaultProtocolClient('electron-fiddle', process.execPath, [path.resolve(process.argv[1])])
+  }
+} else {
+  app.setAsDefaultProtocolClient(APP_PROTOCOL)
+}
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -37,6 +51,27 @@ const createWindow = () => {
   });
 
   protocol.handle('image', imageProtocol)
+
+  const gotTheLock = app.requestSingleInstanceLock()
+
+  if (!gotTheLock) {
+    app.quit()
+  } else if (isWindows || isLinux) {
+    app.on('second-instance', (event, commandLine, workingDirectory) => {
+      // Someone tried to run a second instance, we should focus our window.
+      if (mainWindow) {
+        if (mainWindow.isMinimized()) mainWindow.restore()
+        mainWindow.focus()
+      }
+      // the commandLine is array of strings in which last element is deep link url
+      dialog.showErrorBox('Welcome Back', `You arrived from: ${commandLine.pop()}`)
+    })
+
+    // Create mainWindow, load the rest of the app, etc...
+    app.whenReady().then(() => {
+      createWindow()
+    })
+  }
 };
 
 // This method will be called when Electron has finished
@@ -65,3 +100,7 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+// Handle the protocol. In this case, we choose to show an Error Box.
+app.on('open-url', (event, url) => {
+  dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`)
+})
