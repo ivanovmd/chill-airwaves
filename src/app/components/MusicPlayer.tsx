@@ -88,6 +88,7 @@ const createYoutubePlayer = (onPlayerReady: CallableFunction, onPlayerStateChang
 export const MusicPlayer = () => {
   const [youtubePlayer, setYoutubePlayer] = React.useState<any>(null);
   const [videoInfo, setVideoInfo] = React.useState<VideoInfo | null>(null);
+  const [volume, setVolume] = React.useState<number>(25);
 
   const onPlayerReady = (event: any) => {
     event.target.playVideo();
@@ -125,12 +126,17 @@ export const MusicPlayer = () => {
       youtubePlayer.setShuffle(true);
       youtubePlayer.nextVideo()
       youtubePlayer.addEventListener('onStateChange', onPlayerStateChange)
+      youtubePlayer.setVolume(25)
     }
   }, [youtubePlayer]);
 
-  const setVolume = (volume: number) => {
-    youtubePlayer?.setVolume(volume);
-  }
+  useEffect(() => {
+    if (youtubePlayer) {
+      youtubePlayer.setVolume(volume)
+    }
+  }, [volume])
+
+
   return (
     <SceneLayer name="spotify-player">
       <div className="absolute -left-full">
@@ -142,7 +148,7 @@ export const MusicPlayer = () => {
         <button onClick={() => youtubePlayer?.nextVideo()}>Next</button>
       </div>
       <div>
-        <input type="range" min="0" max="100" onChange={(e) => setVolume(parseInt(e.target.value))} />
+        <input type="range" min="0" max="100" value={volume} onChange={(e) => setVolume(parseInt(e.target.value))} />
       </div>
 
       <div>
