@@ -8,7 +8,7 @@ export const MusicPlayer = () => {
     throw new Error('MusicPlayer must be used within a MusicProvider');
   }
 
-  const { setVolume, nextTrack, playTrack, pauseTrack, volume, videoInfo } = musicContext;
+  const { setVolume, nextTrack, playTrack, pauseTrack, previousTrack, volume, videoInfo } = musicContext;
 
 
   return (
@@ -18,6 +18,7 @@ export const MusicPlayer = () => {
         <div id="youtube-player"></div>
       </div>
       <div>
+        <button onClick={() => previousTrack()}>Prev</button>
         <button onClick={() => pauseTrack()}>Pause</button>
         <button onClick={() => playTrack()}>Play</button>
         <button onClick={() => nextTrack()}>Next</button>

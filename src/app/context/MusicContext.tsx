@@ -17,6 +17,7 @@ export type MusicContextType = {
   previousTrack: () => void;
   pauseTrack: () => void;
   playTrack: () => void;
+  isPlayng: boolean;
 }
 
 export const MusicContext = React.createContext<MusicContextType | null>(null);
@@ -108,6 +109,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
   const [youtubePlayer, setYoutubePlayer] = React.useState<any>(null);
   const [videoInfo, setVideoInfo] = React.useState<VideoInfo | null>(null);
   const [volume, setVolume] = React.useState<number>(25);
+  const [isPlayng, setIsPlaying] = React.useState<boolean>(false);
 
   const nextTrack = () => {
     youtubePlayer.nextVideo()
@@ -130,11 +132,42 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
   }
 
   async function onPlayerStateChange(event: any) {
+    let currentUrl
+    let videoId
+    let videoInfo
+
+    switch (event.data) {
+      case -1:
+        currentUrl = youtubePlayer.getVideoUrl()
+        videoId = extractYouTubeVideoId(currentUrl)
+        console.log(videoId);
+        videoInfo = await fetchVideoInfo(currentUrl)
+        setVideoInfo(videoInfo);
+        console.log('Unstarted');
+        break;
+      case 0:
+        console.log('Video ended');
+        break;
+      case 1:
+        console.log('Video playing');
+        setIsPlaying(true);
+        break;
+      case 2:
+        console.log('Video paused');
+        setIsPlaying(false);
+        break;
+      case 3:
+        console.log('Video buffering');
+        break;
+      case 5:
+        console.log('Video cued');
+        break;
+    }
     if (event.data === -1) {
-      const curretUrl = youtubePlayer.getVideoUrl()
-      const videoId = extractYouTubeVideoId(curretUrl)
+      const currentUrl = youtubePlayer.getVideoUrl()
+      const videoId = extractYouTubeVideoId(currentUrl)
       console.log(videoId);
-      const videoInfo = await fetchVideoInfo(curretUrl)
+      const videoInfo = await fetchVideoInfo(currentUrl)
       setVideoInfo(videoInfo);
     }
   }
