@@ -1,10 +1,8 @@
 import { app, BrowserWindow, dialog, ipcMain, protocol } from 'electron';
 import path from 'path';
-import { config } from 'dotenv';
 import { imageProtocol } from './electron-protocols/imageProtocol';
 import os from 'os';
 
-config({ path: path.join(__dirname, '../.env') });
 
 const isMac = os.platform() === "darwin";
 const isWindows = os.platform() === "win32";
