@@ -19,7 +19,7 @@ export const Main: React.FC = () => {
 
   return (
     <MusicProvider>
-      <GoogleOAuthProvider clientId="811044986765-tgeej8rcva7l1kgjq6mqfsl6ba41khto.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="">
         <BackgroundImageOverlay backgroundImageUrl="image://alaska.png" />
         <MusicPlayer />
 
