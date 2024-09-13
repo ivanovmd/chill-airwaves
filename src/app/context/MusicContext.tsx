@@ -33,22 +33,17 @@ function extractYouTubeVideoId(url: string): string | null {
 }
 
 const fetchVideoInfo = async (url: any) => {
-  try {
-    const response = await fetch(
-      `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`
-    );
+  const response = await fetch(
+    `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`
+  );
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch video info');
-    }
-
-    const data: VideoInfo = await response.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log('Error fetching video info. Make sure the URL is correct and the video exists.');
-    console.error(err);
+  if (!response.ok) {
+    throw new Error('Failed to fetch video info');
   }
+
+  const data: VideoInfo = await response.json();
+  console.log(data);
+  return data;
 };
 
 const loadYoutubeIrfameAPI = (): Promise<void> => {
@@ -139,10 +134,6 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
   }
 
   async function onPlayerStateChange(event: any) {
-    let currentUrl
-    let videoId
-    let videoInfo
-
     switch (event.data) {
       case -1:
         console.log('Unstarted');
@@ -151,13 +142,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
         console.log('Video ended');
         break;
       case 1:
-        currentUrl = youtubePlayer.getVideoUrl()
-        videoId = extractYouTubeVideoId(currentUrl)
-        console.log(videoId);
-        videoInfo = await fetchVideoInfo(currentUrl)
-        setVideoInfo(videoInfo);
-        console.log('Video playing');
-        setIsPlaying(true);
+        updateVideoInfo(youtubePlayer);
         break;
       case 2:
         console.log('Video paused');
@@ -171,12 +156,21 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
         break;
     }
     if (event.data === -1) {
+      updateVideoInfo(youtubePlayer);
+    }
+  }
+
+  const updateVideoInfo = async (youtubePlayer: any) => {
+    try {
       const currentUrl = youtubePlayer.getVideoUrl()
       const videoId = extractYouTubeVideoId(currentUrl)
       console.log(videoId);
       const videoInfo = await fetchVideoInfo(currentUrl)
       setVideoInfo(videoInfo);
+    } catch (error) {
+      console.error('Error fetching video info:', error);
     }
+
   }
 
   const onError = (event: any) => {
