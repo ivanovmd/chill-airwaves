@@ -138,17 +138,17 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
 
     switch (event.data) {
       case -1:
-        currentUrl = youtubePlayer.getVideoUrl()
-        videoId = extractYouTubeVideoId(currentUrl)
-        console.log(videoId);
-        videoInfo = await fetchVideoInfo(currentUrl)
-        setVideoInfo(videoInfo);
         console.log('Unstarted');
         break;
       case 0:
         console.log('Video ended');
         break;
       case 1:
+        currentUrl = youtubePlayer.getVideoUrl()
+        videoId = extractYouTubeVideoId(currentUrl)
+        console.log(videoId);
+        videoInfo = await fetchVideoInfo(currentUrl)
+        setVideoInfo(videoInfo);
         console.log('Video playing');
         setIsPlaying(true);
         break;
@@ -172,6 +172,26 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
     }
   }
 
+  const onError = (event: any) => {
+    console.error(event);
+    switch (event.data) {
+      case 2:
+        console.log('Invalid parameter');
+        break;
+      case 100:
+        console.log('Video not found');
+        break;
+      case 101:
+      case 150:
+        nextTrack();
+        console.log('Video not embeddable');
+        break;
+      default:
+        console.log('Unknown error');
+        break;
+    }
+  }
+
   useEffect(() => {
     async function createYoutubeIframe() {
       await loadYoutubeIrfameAPI()
@@ -185,6 +205,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
     return () => {
       youtubePlayer?.destroy();
       youtubePlayer?.removeEventListener('onStateChange', onPlayerStateChange)
+      youtubePlayer?.removeEventListener('onError', onError)
     }
   }, []);
 
@@ -193,6 +214,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
       youtubePlayer.setShuffle(true);
       youtubePlayer.nextVideo()
       youtubePlayer.addEventListener('onStateChange', onPlayerStateChange)
+      youtubePlayer.addEventListener('onError', onError)
       youtubePlayer.setVolume(25)
     }
   }, [youtubePlayer]);
@@ -204,7 +226,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
   }, [volume])
 
   return (
-    <MusicContext.Provider value={{ youtubePlayer, videoInfo, volume, setVolume, nextTrack, previousTrack, pauseTrack, playTrack }}>
+    <MusicContext.Provider value={{ youtubePlayer, videoInfo, isPlayng, volume, setVolume, nextTrack, previousTrack, pauseTrack, playTrack }}>
       {children}
     </MusicContext.Provider>
   )
