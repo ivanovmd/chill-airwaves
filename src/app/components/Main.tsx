@@ -7,11 +7,14 @@ import { Login } from "./Login";
 
 export const Main: React.FC = () => {
   const [downloadsPath, setDownloadsPath] = React.useState<string | null>(null);
+  const [googleClientId, setGoogleClientId] = React.useState<string | null>(null);
 
 
   useEffect(() => {
-    window.electronAPI.getDownloadsPath().then((downloadsPath: string) => {
-      setDownloadsPath(downloadsPath);
+    window.electronAPI.getEnv('GOOGLE_CLIENT_ID').then((googleClientId: string) => {
+      console.log(googleClientId);
+
+      setGoogleClientId(googleClientId);
     });
   }, []);
 
@@ -19,14 +22,10 @@ export const Main: React.FC = () => {
 
   return (
     <MusicProvider>
-      <GoogleOAuthProvider clientId="">
+      {googleClientId && <GoogleOAuthProvider clientId={googleClientId}>
         <BackgroundImageOverlay backgroundImageUrl="image://alaska.png" />
         <MusicPlayer />
-
-        <br />
-
-        <Login />
-      </GoogleOAuthProvider>
+      </GoogleOAuthProvider>}
     </MusicProvider>
 
   );

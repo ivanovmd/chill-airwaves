@@ -2,7 +2,7 @@
 declare global {
   interface Window {
     electronAPI: {
-      getDownloadsPath: () => Promise<string>;
+      getEnv: (key: string) => Promise<string>;
     };
     YT: any;
     onYouTubeIframeAPIReady: () => void;

@@ -2,7 +2,10 @@ import { app, BrowserWindow, dialog, ipcMain, protocol } from 'electron';
 import path from 'path';
 import { imageProtocol } from './electron-protocols/imageProtocol';
 import os from 'os';
+import { config } from "dotenv";
 
+
+config({ path: '.env' });
 
 const isMac = os.platform() === "darwin";
 const isWindows = os.platform() === "win32";
@@ -70,6 +73,10 @@ const createWindow = () => {
       createWindow()
     })
   }
+
+  ipcMain.handle('getEnv', (_, key: string) => {
+    return process.env[key];
+  });
 };
 
 // This method will be called when Electron has finished

@@ -75,14 +75,14 @@ const loadYoutubeIrfameAPI = (): Promise<void> => {
   });
 }
 
-const createYoutubePlayer = (onPlayerReady: CallableFunction, onPlayerStateChange?: CallableFunction) => {
+const createYoutubePlayer = (playlistId: string, onPlayerReady: CallableFunction, onPlayerStateChange?: CallableFunction) => {
   return new Promise((resolve, reject) => {
     const player = new window.YT.Player('youtube-player', {
       height: '390',
       width: '640',
       playerVars: {
         listType: 'playlist',
-        list: 'PL5ysyoZKAAdGkUaiLuRWnrgYovpA0l6aL',
+        list: playlistId,
         loop: 1,
         autoplay: 0,
         controls: 0,
@@ -110,6 +110,13 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
   const [videoInfo, setVideoInfo] = React.useState<VideoInfo | null>(null);
   const [volume, setVolume] = React.useState<number>(25);
   const [isPlayng, setIsPlaying] = React.useState<boolean>(false);
+  const [playlistId, setPlaylistId] = React.useState<string | null>(null);
+
+  useEffect(() => {
+    window.electronAPI.getEnv('YOUTUBE_PLAYLIST_ID').then((playlistId: string) => {
+      setPlaylistId(playlistId);
+    })
+  }, []);
 
   const nextTrack = () => {
     youtubePlayer.nextVideo()
@@ -196,7 +203,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
     async function createYoutubeIframe() {
       await loadYoutubeIrfameAPI()
       window.onYouTubeIframeAPIReady = async () => {
-        const youtubePlayer: any = await createYoutubePlayer(onPlayerReady)
+        const youtubePlayer: any = await createYoutubePlayer(playlistId, onPlayerReady)
         setYoutubePlayer(youtubePlayer);
       }
     }
@@ -207,7 +214,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
       youtubePlayer?.removeEventListener('onStateChange', onPlayerStateChange)
       youtubePlayer?.removeEventListener('onError', onError)
     }
-  }, []);
+  }, [playlistId]);
 
   useEffect(() => {
     if (youtubePlayer) {

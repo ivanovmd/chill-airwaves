@@ -5,5 +5,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  getDownloadsPath: () => ipcRenderer.invoke('get-downloads-path')
+  getEnv: (key: string) => ipcRenderer.invoke('getEnv', key),
 });
