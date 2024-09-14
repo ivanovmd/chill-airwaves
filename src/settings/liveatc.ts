@@ -23,5 +23,17 @@ export const airports: Airport[] = [
         path: 'VHHH5-App-Dep-Dir-Zone'
       }
     ]
+  },
+  {
+    name: 'Tokyo International Airport (Haneda Airport)',
+    iata: 'HND',
+    icao: 'RJTT',
+    restricted: false,
+    stations: [
+      {
+        name: 'RJTT-App',
+        path: 'RJTT-App'
+      }
+    ]
   }
 ]

@@ -3,6 +3,7 @@ import path from 'path';
 import { imageProtocol } from './electron-protocols/imageProtocol';
 import os from 'os';
 import { config } from "dotenv";
+import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 
 config({ path: '.env' });
@@ -77,6 +78,10 @@ const createWindow = () => {
   ipcMain.handle('getEnv', (_, key: string) => {
     return process.env[key];
   });
+
+  installExtension(REDUX_DEVTOOLS)
+    .then((name) => console.log(`Added Extension: ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
 };
 
 // This method will be called when Electron has finished

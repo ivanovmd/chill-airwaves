@@ -14,7 +14,7 @@ export const MusicPlayer = () => {
 
   return (
     <SceneLayer name="spotify-player">
-      <div className="absolute -left-full">
+      <div className="absolute" style={{ left: '-99999px' }}>
         {/*<div className="">*/}
         <div id="youtube-player"></div>
       </div>
