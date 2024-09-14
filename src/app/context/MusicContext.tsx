@@ -143,6 +143,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
         break;
       case 1:
         updateVideoInfo(youtubePlayer);
+        console.log('Video playing');
         break;
       case 2:
         console.log('Video paused');
@@ -155,19 +156,15 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
         console.log('Video cued');
         break;
     }
-    if (event.data === -1) {
-      updateVideoInfo(youtubePlayer);
-    }
   }
 
   const updateVideoInfo = async (youtubePlayer: any) => {
     try {
       const currentUrl = youtubePlayer.getVideoUrl()
-      const videoId = extractYouTubeVideoId(currentUrl)
-      console.log(videoId);
       const videoInfo = await fetchVideoInfo(currentUrl)
       setVideoInfo(videoInfo);
     } catch (error) {
+      playTrack();
       console.error('Error fetching video info:', error);
     }
 
@@ -201,7 +198,8 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
         setYoutubePlayer(youtubePlayer);
       }
     }
-    createYoutubeIframe()
+
+    if (playlistId) createYoutubeIframe()
 
     return () => {
       youtubePlayer?.destroy();

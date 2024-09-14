@@ -4,6 +4,7 @@ import { MusicPlayer } from "./MusicPlayer";
 import { MusicProvider } from "../context/MusicContext";
 import { GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 import { Login } from "./Login";
+import { Settings } from "./Settings";
 
 export const Main: React.FC = () => {
   const [downloadsPath, setDownloadsPath] = React.useState<string | null>(null);
