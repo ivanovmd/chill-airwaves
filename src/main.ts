@@ -16,7 +16,7 @@ const APP_PROTOCOL = 'chill-airwaves';
 
 if (process.defaultApp) {
   if (process.argv.length >= 2) {
-    app.setAsDefaultProtocolClient('electron-fiddle', process.execPath, [path.resolve(process.argv[1])])
+    app.setAsDefaultProtocolClient(APP_PROTOCOL, process.execPath, [path.resolve(process.argv[1])])
   }
 } else {
   app.setAsDefaultProtocolClient(APP_PROTOCOL)
@@ -76,6 +76,8 @@ const createWindow = () => {
   }
 
   ipcMain.handle('getEnv', (_, key: string) => {
+    console.log(key);
+
     return process.env[key];
   });
 
