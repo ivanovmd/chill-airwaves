@@ -31,8 +31,20 @@ export const airports: Airport[] = [
     restricted: false,
     stations: [
       {
-        name: 'RJTT-App',
+        name: 'App-Dep',
         path: 'RJTT-App-Dep'
+      }
+    ]
+  },
+  {
+    name: 'Rocky Mountain Metropolitan Airport',
+    iata: 'bjc',
+    icao: 'kbjc',
+    restricted: false,
+    stations: [
+      {
+        name: 'Gnd-Twr',
+        path: 'KBJC3-Gnd-Twr'
       }
     ]
   }

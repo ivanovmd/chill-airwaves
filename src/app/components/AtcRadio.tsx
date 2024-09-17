@@ -10,10 +10,8 @@ export const AtcRadio = () => {
       <h1>ATC Radio</h1>
       {currentTrack &&
 
-        <audio controls autoPlay>
-          <source src={currentTrack} type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>}
+        <audio controls autoPlay src={currentTrack} ></audio>}
+
     </div>
   );
 }
