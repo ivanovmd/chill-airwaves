@@ -76,14 +76,14 @@ const createWindow = () => {
   }
 
   ipcMain.handle('getEnv', (_, key: string) => {
-    console.log(key);
+    console.log(process.env[key]);
 
     return process.env[key];
   });
 
-  installExtension(REDUX_DEVTOOLS)
-    .then((name) => console.log(`Added Extension: ${name}`))
-    .catch((err) => console.log('An error occurred: ', err));
+  //installExtension(REDUX_DEVTOOLS)
+  //  .then((name) => console.log(`Added Extension: ${name}`))
+  //  .catch((err) => console.log('An error occurred: ', err));
 };
 
 // This method will be called when Electron has finished

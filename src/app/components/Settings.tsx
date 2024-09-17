@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { airports } from "../../settings/liveatc";
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectedAirport, setSelectedAirport } from "../store/airportsSlice";
+import { getSelectedAirport, setSelectedAirportIata } from "../store/airports/airportsSlice";
 
 export const Settings = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export const Settings = () => {
       <h3>Airpots:</h3>
       <p>{selectedAirport}</p>
       {airports.map((airport) => (
-        <div key={airport.iata} onClick={() => dispatch(setSelectedAirport(airport.iata))}>
+        <div key={airport.iata} onClick={() => dispatch(setSelectedAirportIata(airport.iata))}>
           <h4>{airport.name} ({airport.iata})</h4>
         </div>
       ))}

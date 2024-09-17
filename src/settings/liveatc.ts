@@ -14,8 +14,8 @@ export interface Station {
 export const airports: Airport[] = [
   {
     name: 'Hong Kong International Airport',
-    iata: 'HKG',
-    icao: 'VHHH',
+    iata: 'hkg',
+    icao: 'vhhh',
     restricted: false,
     stations: [
       {
@@ -26,13 +26,13 @@ export const airports: Airport[] = [
   },
   {
     name: 'Tokyo International Airport (Haneda Airport)',
-    iata: 'HND',
-    icao: 'RJTT',
+    iata: 'hnd',
+    icao: 'rjtt',
     restricted: false,
     stations: [
       {
         name: 'RJTT-App',
-        path: 'RJTT-App'
+        path: 'RJTT-App-Dep'
       }
     ]
   }
