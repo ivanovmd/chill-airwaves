@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { SceneLayer } from "./Scene";
 import { MusicContext } from "../context/MusicContext";
 import { Settings } from "./Settings";
+import { AtcRadio } from "./AtcRadio";
 
 export const MusicPlayer = () => {
   const musicContext = useContext(MusicContext);
@@ -45,6 +46,10 @@ export const MusicPlayer = () => {
               </div>
             </div>
           )}
+
+          <div>
+            <AtcRadio />
+          </div>
         </div>
 
         <div>

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { listenerMiddleware } from "../middlewares/listener";
 import { buildLiveATCUrl } from "../../../services/atcService";
 import { RootState } from "..";
@@ -46,6 +46,12 @@ export const airportsSlice = createSlice({
   },
 });
 
+
+export const getCurrentAtcTrack = createSelector(
+  (state: RootState) => state.airports.atcPlaylist.tracks,
+  (state: RootState) => state.airports.atcPlaylist.currentTrackIndex,
+  (tracks, currentTrackIndex) => tracks[currentTrackIndex]
+)
 
 export const { setSelectedAirportIata, setAtcPlaylist } = airportsSlice.actions;
 export const { getSelectedAirport } = airportsSlice.selectors;
