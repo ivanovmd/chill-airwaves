@@ -1,6 +1,5 @@
 import { app, BrowserWindow, dialog, ipcMain, protocol } from 'electron';
 import path from 'path';
-import { imageProtocol } from './electron-protocols/imageProtocol';
 import os from 'os';
 import { config } from "dotenv";
 import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
@@ -51,8 +50,6 @@ const createWindow = () => {
   ipcMain.handle('get-downloads-path', () => {
     return path.join(app.getPath('downloads'));
   });
-
-  protocol.handle('image', imageProtocol)
 
   const gotTheLock = app.requestSingleInstanceLock()
 
