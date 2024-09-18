@@ -3,6 +3,7 @@ import path from 'path';
 import os from 'os';
 import { config } from "dotenv";
 import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
+import { atcProtocolHandler } from './protocols/atcProtocol';
 
 
 config({ path: '.env' });
@@ -77,6 +78,8 @@ const createWindow = () => {
 
     return process.env[key];
   });
+
+  protocol.handle(process.env.ATC_PROTOCOL, atcProtocolHandler)
 
   //installExtension(REDUX_DEVTOOLS)
   //  .then((name) => console.log(`Added Extension: ${name}`))

@@ -15,8 +15,8 @@ export interface AirportsState {
   };
 }
 
-export const airportsSlice = createSlice({
-  name: 'airports',
+export const atcSlice = createSlice({
+  name: 'atc',
   initialState: {
     selectedAirportIata: null,
     atcPlaylist: {
@@ -48,30 +48,32 @@ export const airportsSlice = createSlice({
 
 
 export const getCurrentAtcTrack = createSelector(
-  (state: RootState) => state.airports.atcPlaylist.tracks,
-  (state: RootState) => state.airports.atcPlaylist.currentTrackIndex,
+  (state: RootState) => state.atc.atcPlaylist.tracks,
+  (state: RootState) => state.atc.atcPlaylist.currentTrackIndex,
   (tracks, currentTrackIndex) => tracks[currentTrackIndex]
 )
 
-export const { setSelectedAirportIata, setAtcPlaylist } = airportsSlice.actions;
-export const { getSelectedAirport } = airportsSlice.selectors;
+export const { setSelectedAirportIata, setAtcPlaylist } = atcSlice.actions;
+export const { getSelectedAirport } = atcSlice.selectors;
 
 
 startAppListening({
   actionCreator: setSelectedAirportIata,
-  effect: async (action, { dispatch, getState }) => {
+  effect: async (_, { dispatch, getState }) => {
     const state = getState() as RootState;
-    // build atc files urls based on the selected airport
-    const ATC_BASE_URL = await window.electronAPI.getEnv('ATC_BASE_URL')
+    const ATC_PROTOCOL = await window.electronAPI.getEnv('ATC_PROTOCOL')
+
     const numberOfAtcRecords = 24;
     const atcFilesUrls = [];
-    const selectedAirportIata = state.airports.selectedAirportIata;
+    const selectedAirportIata = state.atc.selectedAirportIata;
     const selectedAirport = airports.find(airport => airport.iata === selectedAirportIata);
 
     for (let i = numberOfAtcRecords; i > 0; i--) {
-      const atcUrl = buildLiveATCUrl(ATC_BASE_URL, selectedAirport, i);
+      const atcUrl = buildLiveATCUrl(ATC_PROTOCOL + '://', selectedAirport, i);
       atcFilesUrls.push(atcUrl);
     }
+
+    console.log(atcFilesUrls);
 
     dispatch(setAtcPlaylist({ tracks: atcFilesUrls }));
   }

@@ -1,7 +1,7 @@
 import { app, net } from "electron";
 import fs from "fs";
 
-export const saveToCache = (fileName: string, baseUrl: string): Promise<void> => {
+export const saveToCache = (fileName: string, baseUrl: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     console.log(`Saving ${fileName} to cache.`);
     const cachePath = app.getPath('downloads');
@@ -18,7 +18,7 @@ export const saveToCache = (fileName: string, baseUrl: string): Promise<void> =>
       response.on('end', () => {
         fileStream.end();
         console.log(`File ${fileName} saved to cache.`);
-        resolve();
+        resolve(filePath);
       });
 
       response.on('error', (error: Error) => {

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
-import { airportsSlice } from './airports/airportsSlice'
+import { atcSlice } from './atc/atsSlice'
 import { userSlice } from './userSlice'
 import { listenerMiddleware } from './middlewares/listener'
 
@@ -9,7 +9,7 @@ import { listenerMiddleware } from './middlewares/listener'
 
 export const store = configureStore({
   reducer: {
-    [airportsSlice.reducerPath]: airportsSlice.reducer,
+    [atcSlice.reducerPath]: atcSlice.reducer,
     [userSlice.reducerPath]: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
