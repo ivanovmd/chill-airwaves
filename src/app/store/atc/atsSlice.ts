@@ -63,7 +63,7 @@ startAppListening({
     const state = getState() as RootState;
     const ATC_PROTOCOL = await window.electronAPI.getEnv('ATC_PROTOCOL')
 
-    const numberOfAtcRecords = 24;
+    const numberOfAtcRecords = 48;
     const atcFilesUrls = [];
     const selectedAirportIata = state.atc.selectedAirportIata;
     const selectedAirport = airports.find(airport => airport.iata === selectedAirportIata);

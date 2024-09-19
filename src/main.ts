@@ -2,7 +2,7 @@ import { app, BrowserWindow, dialog, ipcMain, protocol } from 'electron';
 import path from 'path';
 import os from 'os';
 import { config } from "dotenv";
-import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
+import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { atcProtocolHandler } from './protocols/atcProtocol';
 
 
@@ -81,9 +81,13 @@ const createWindow = () => {
 
   protocol.handle(process.env.ATC_PROTOCOL, atcProtocolHandler)
 
-  //installExtension(REDUX_DEVTOOLS)
-  //  .then((name) => console.log(`Added Extension: ${name}`))
-  //  .catch((err) => console.log('An error occurred: ', err));
+  installExtension(REDUX_DEVTOOLS)
+    .then((name) => console.log(`Added Extension: ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
+
+  installExtension(REACT_DEVELOPER_TOOLS)
+    .then((name) => console.log(`Added Extension: ${name}`))
+    .catch((err) => console.log('An error occurred: ', err));
 };
 
 // This method will be called when Electron has finished

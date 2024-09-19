@@ -1,6 +1,4 @@
 import { promises as fs } from 'fs';
-import path from 'path';
-import { app } from 'electron';
 
 export const removeFromCache = async (filePath: string): Promise<void> => {
   console.log(`Removing ${filePath} from cache.`);
