@@ -1,6 +1,5 @@
 import ffmpeg from 'fluent-ffmpeg';
 import { spawn } from 'child_process';
-import { promises as fs } from 'fs';
 
 interface FileInfo {
   size: number;

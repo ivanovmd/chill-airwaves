@@ -3,6 +3,7 @@ import { saveToCache } from "../helpers/cacheFile"
 import { config } from "dotenv";
 import { removeSilence } from "../helpers/silenceRemover";
 import { randomUUID } from "crypto";
+import { removeFromCache } from "../helpers/removeCacheFile";
 
 
 const ATC_PROTOCOL = 'atc'
@@ -18,6 +19,8 @@ export const atcProtocolHandler = async (request: GlobalRequest) => {
   const { cacheDirPath } = await saveToCache(fileName, ATC_BASE_URL)
   const newFileName = randomUUID() + '.mp3';
   const reducedSilenceFilePath = await removeSilence(cacheDirPath + '/' + fileName, cacheDirPath + '/' + newFileName)
+
+  removeFromCache(cacheDirPath + '/' + fileName)
 
   try {
     // Ensure the file exists and read it into a buffer
