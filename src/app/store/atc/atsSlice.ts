@@ -53,7 +53,7 @@ export const getCurrentAtcTrack = createSelector(
   (tracks, currentTrackIndex) => tracks[currentTrackIndex]
 )
 
-export const { setSelectedAirportIata, setAtcPlaylist } = atcSlice.actions;
+export const { setSelectedAirportIata, setAtcPlaylist, nextTrack } = atcSlice.actions;
 export const { getSelectedAirport } = atcSlice.selectors;
 
 

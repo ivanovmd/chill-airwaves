@@ -1,8 +1,8 @@
-import { app, net } from "electron"
-import path from "path"
 import fs from "fs-extra"
 import { saveToCache } from "../helpers/cacheFile"
 import { config } from "dotenv";
+import { removeSilence } from "../helpers/silenceRemover";
+import { randomUUID } from "crypto";
 
 
 const ATC_PROTOCOL = 'atc'
@@ -15,12 +15,14 @@ export const atcProtocolHandler = async (request: GlobalRequest) => {
   const fileName = encodeURIComponent(fileUrl)
   const ATC_BASE_URL = process.env.ATC_BASE_URL;
 
-  const filePath = await saveToCache(fileName, ATC_BASE_URL)
+  const { cacheDirPath } = await saveToCache(fileName, ATC_BASE_URL)
+  const newFileName = randomUUID() + '.mp3';
+  const reducedSilenceFilePath = await removeSilence(cacheDirPath + '/' + fileName, cacheDirPath + '/' + newFileName)
 
   try {
     // Ensure the file exists and read it into a buffer
-    const fileBuffer = await fs.promises.readFile(filePath);
-    const fileStats = await fs.promises.stat(filePath);
+    const fileBuffer = await fs.promises.readFile(reducedSilenceFilePath);
+    const fileStats = await fs.promises.stat(reducedSilenceFilePath);
 
     // Set headers like 'Content-Type' and 'Content-Length'
     const headers = {
