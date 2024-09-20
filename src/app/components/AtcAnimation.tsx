@@ -24,6 +24,17 @@ export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement }) => {
         source: audioElement, ...AUDIO_MOTION_ANALYZER_SETTINGS, overlay: true
       });
 
+      //audioMotionAnalyzer.registerGradient('custom', {
+      //  bgColor: 'transparent',
+      //  colorStops: [
+      //    'blue',
+      //    'yellow',
+      //    'red',
+      //  ]
+      //})
+      //audioMotionAnalyzer.gradient = 'custom'
+
+
       setAudioMotionAnalyzer(audioMotionAnalyzer);
 
       return () => {
@@ -36,7 +47,7 @@ export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement }) => {
     <div>
       <h1>ATC Animation Component</h1>
 
-      <div ref={containerRef}></div>
+      <div style={{ height: '400px', width: '400px' }} ref={containerRef}></div>
 
     </div>
   );
