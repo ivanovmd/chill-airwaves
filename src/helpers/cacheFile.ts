@@ -1,23 +1,16 @@
 import { app, IncomingMessage, net } from 'electron';
 import fs from 'fs';
+import path from 'path';
 
-export const saveToCache = (fileName: string, baseUrl: string): Promise<{ cacheDirPath: string, fileName: string }> => {
+export const saveToCache = (fileName: string, destinationFolderPath: string, remoteFileUrl: string): Promise<{ cacheDirPath: string, fileName: string }> => {
   return new Promise((resolve, reject) => {
     console.log(`Saving ${fileName} to cache.`);
-    const cachePath = app.getPath('downloads');
-    const folderName = 'chill-airwaves-cache';
+    const cachedFilePath = path.join(destinationFolderPath, fileName)
 
-    // Ensure the cache directory exists
-    const cacheDir = `${cachePath}/${folderName}`;
-    if (!fs.existsSync(cacheDir)) {
-      fs.mkdirSync(cacheDir);
-    }
-
-    const request = net.request(baseUrl + fileName);
+    const request = net.request(remoteFileUrl);
 
     request.on('response', (response: IncomingMessage) => {
-      const filePath = `${cacheDir}/${fileName}`;
-      const fileStream = fs.createWriteStream(filePath);
+      const fileStream = fs.createWriteStream(cachedFilePath);
 
       response.on('data', (chunk: Buffer) => {
         fileStream.write(chunk);
@@ -25,8 +18,8 @@ export const saveToCache = (fileName: string, baseUrl: string): Promise<{ cacheD
 
       response.on('end', () => {
         fileStream.end();
-        console.log(`File ${fileName} saved to ${filePath}`);
-        resolve({ cacheDirPath: cacheDir, fileName: fileName });
+        console.log(`File ${fileName} saved to ${cachedFilePath}`);
+        resolve({ cacheDirPath: destinationFolderPath, fileName: fileName });
       });
 
       response.on('error', (error: Error) => {
