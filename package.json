@@ -27,6 +27,7 @@
     "@types/electron": "^1.6.10",
     "@types/ffmpeg": "^1.0.7",
     "@types/fluent-ffmpeg": "^2.1.26",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",

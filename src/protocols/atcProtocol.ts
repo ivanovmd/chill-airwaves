@@ -1,10 +1,10 @@
 import fs from "fs-extra"
-import { saveToCache } from "../helpers/cacheFile"
 import { config } from "dotenv";
 import { removeSilence } from "../helpers/silenceRemover";
 import { removeFromCache } from "../helpers/removeCacheFile";
-import { app } from "electron";
+import { app, net } from "electron";
 import path from "path";
+import { CacheService } from "../services/cacheService";
 
 
 const ATC_PROTOCOL = 'atc'
@@ -45,33 +45,30 @@ export const atcProtocolHandler = async (request: GlobalRequest) => {
   const remoteFilePath = request.url.substr(ATC_PROTOCOL.length + 3)
   const remoteFileUrl = `${ATC_BASE_URL}${remoteFilePath}`
 
-  const fileName = remoteFilePath.substring(remoteFilePath.lastIndexOf('/') + 1);
+  const fileName = remoteFilePath.split('/').pop();
   const cacheFolderPath = path.join(app.getPath('downloads'), 'chill-airwaves-cache');
-  const cachedFilePath = path.join(cacheFolderPath, fileName);
+
+  const cacheService = new CacheService(cacheFolderPath, fs, app, path, net);
 
   const fileExtension = path.extname(fileName);
   const baseName = path.basename(fileName, fileExtension);
   const reducedSilenceFileName = `${baseName}-reduced-silence${fileExtension}`;
   const reducedSilenceFilePath = path.join(cacheFolderPath, reducedSilenceFileName);
 
-  // Ensure the cache directory exists
-  if (!fs.existsSync(cacheFolderPath)) {
-    fs.mkdirSync(cacheFolderPath);
-  }
-
   // Check if the file is already cached
-  if (fs.existsSync(reducedSilenceFilePath)) {
+  if (cacheService.isAvailable(reducedSilenceFilePath)) {
     return fileResponse(reducedSilenceFilePath);
   }
 
   try {
-    await saveToCache(fileName, cacheFolderPath, remoteFileUrl);
-    await removeSilence(cachedFilePath, reducedSilenceFilePath)
+    const { cacheFilePath } = await cacheService.download(remoteFileUrl);
+    await removeSilence(cacheFilePath, reducedSilenceFilePath)
+    removeFromCache(cacheFilePath);
   } catch (error) {
     return new Response('Error saving file to cache', { status: 500 });
   }
 
-  removeFromCache(cachedFilePath);
+
 
   return fileResponse(reducedSilenceFilePath);
 }
