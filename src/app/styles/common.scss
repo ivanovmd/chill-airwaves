@@ -1,7 +1,7 @@
 
 
 .shrunkable {
-  transition: all ease-in-out 0.5s;
+  transition: all ease-in-out 0.3s;
   overflow: hidden;
 }
 
@@ -11,4 +11,17 @@
 
 .expanded {
   width: 100%;
+}
+
+.rotating {
+  animation: rotate 1s linear infinite;
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }

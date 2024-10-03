@@ -5,13 +5,14 @@ import { Settings } from "./Settings";
 import { AtcRadio } from "./AtcRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedAirport, setSelectedAirportIata } from "../store/atc/atsSlice";
-import { DotsThreeCircleVertical, DotsThreeVertical, Pause, PauseCircle, Play, PlayCircle, SkipBack, SkipBackCircle, SkipForward, SkipForwardCircle, SlidersHorizontal, SpeakerHigh } from "@phosphor-icons/react";
+import { CircleNotch, DotsThreeCircleVertical, DotsThreeVertical, Pause, PauseCircle, Play, PlayCircle, SkipBack, SkipBackCircle, SkipForward, SkipForwardCircle, SlidersHorizontal, SpeakerHigh, SpeakerLow, SpeakerNone, SpeakerX, SpotifyLogo, Vibrate, YoutubeLogo } from "@phosphor-icons/react";
 
 export const MusicPlayer = () => {
   const musicContext = useContext(MusicContext);
   const dispatch = useDispatch();
   const selectedAirport = useSelector(getSelectedAirport)
   const [showVolume, setShowVolume] = React.useState(false);
+  const [unmuteVolume, setUnmuteVolume] = React.useState(25);
 
   if (!musicContext) {
     throw new Error('MusicPlayer must be used within a MusicProvider');
@@ -34,80 +35,100 @@ export const MusicPlayer = () => {
   }
 
 
+  function renderSpeaker() {
+    if (volume === 0) {
+      return <SpeakerX weight="fill" size={28} />
+    }
+
+    if (volume < 25) {
+      return <SpeakerNone weight="fill" size={28} />
+    }
+
+    if (volume < 50 && volume >= 25) {
+      return <SpeakerLow weight="fill" size={28} />
+    }
+
+    if (volume >= 50) {
+      return <SpeakerHigh weight="fill" size={28} />
+    }
+  }
+
+  function toggleMute() {
+    if (volume === 0) {
+      setVolume(unmuteVolume);
+    } else {
+      setUnmuteVolume(volume);
+      setVolume(0);
+    }
+  }
+
+
   return (
-    <SceneLayer name="spotify-player">
-      <div className="absolute" style={{ left: '-99999px' }}>
-        {/*<div className="">*/}
-        <div id="youtube-player"></div>
-      </div>
-
-      {/*<div className="grid grid-cols-2">*/}
-      <div>
-        <div>
-          <input type="range" min="0" max="100" value={volume} onChange={(e) => setVolume(parseInt(e.target.value))} />
+    <div className="w-screen h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://cdn.midjourney.com/eb296cb9-9475-4564-a444-f30232157973/0_0.png')" }}>
+      <SceneLayer name="spotify-player" className="bg-gradient-to-t from-black to-transparent">
+        <div className="absolute" style={{ left: '-99999px' }}>
+          <div id="youtube-player"></div>
         </div>
 
-
-        <div className="flex">
-          <div>
-            <div className="relative overflow-hidden rounded-full" style={{ height: '50px', width: '50px' }}>
-              <img style={{ top: '-18%', height: '135%' }} className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" src={videoInfo?.thumbnail_url} alt="" />
-            </div>
-          </div>
-
-          <div style={{ minWidth: '400px' }}>
-            <div>
-              <p>{videoInfo?.title || '...'}</p>
-            </div>
-            <div>
-              <p>{videoInfo?.author_name.replace(" - Topic", "") || '...'}</p>
-            </div>
-          </div>
-
-          <div className="flex justify-center">
-            <div className="flex">
-              <button onClick={() => previousTrack()}>
-                {/*<SkipBack size={38}  />*/}
-                <SkipBackCircle size={38} />
-              </button>
-            </div>
-
-            <div className="flex">
-              <button onClick={handlePlayPause}>
-                {isPlayng ?
-                  //<Pause size={38}  />
-                  <PauseCircle size={38} />
-                  :
-                  //<Play size={38}  />
-                  <PlayCircle size={38} />
-
-
-                }
-              </button>
-            </div>
-
-            <div className="flex">
-              <button onClick={() => nextTrack()}>
-                {/*<SkipForward size={38}  />*/}
-                <SkipForwardCircle size={38} />
-              </button>
-            </div>
-
-            <div className="flex" onMouseEnter={() => setShowVolume(true)} onMouseLeave={() => setShowVolume(false)}>
-              <div className={`flex shrunkable ${showVolume ? 'expanded' : 'shrunk'}`}>
-                <input type="range" min="0" max="100" />
+        <div className="w-full absolute bottom-5 px-5 flex flex-row justify-center text-white">
+          <div className="w-full flex items-center py-4 px-5 min-h-16">
+            <div className="flex-1 flex items-center overflow-hidden">
+              <div className="flex items-center space-x-2 min-w-0">
+                <div className="relative overflow-hidden rounded-full flex-shrink-0" style={{ height: '50px', width: '50px' }}>
+                  <img style={{ top: '-18%', height: '135%' }} className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" src={videoInfo?.thumbnail_url} alt="" />
+                </div>
+                <div className="truncate min-w-0">
+                  <p className="truncate">{videoInfo?.title || '...'}</p>
+                  <div className="flex flex-row space-x-1 items-center">
+                    <p className="truncate">{videoInfo?.author_name.replace(" - Topic", "") || '...'} </p>
+                    <YoutubeLogo weight="fill" style={{ paddingTop: '3px', paddingLeft: '3px' }} size={20} color="#FF0000" />
+                    <SpotifyLogo weight="fill" style={{ paddingTop: '3px' }} size={20} color="#1DB954" />
+                  </div>
+                </div>
               </div>
-              <button>
-                <SpeakerHigh size={38} />
+            </div>
+            <div className="flex-1 flex justify-center" style={{ width: 28 * 3 + 'px' }}>
+              <div className="flex">
+                <button onClick={() => previousTrack()}>
+                  <SkipBack weight="fill" size={28} />
+                  {/*<SkipBackCircle size={28}  />*/}
+                </button>
+              </div>
+
+              <div className="flex">
+                {isBuffering && !isPlayng ? <CircleNotch className="rotating" size={28} /> :
+                  <button onClick={handlePlayPause}>
+                    {isPlayng ?
+                      <Pause size={28} weight="fill" />
+                      //<PauseCircle size={28}  />
+                      :
+                      <Play size={28} weight="fill" />
+                      //<PlayCircle size={28}  />
+                    }
+                  </button>
+                }
+              </div>
+
+              <div className="flex">
+                <button onClick={() => nextTrack()}>
+                  <SkipForward weight="fill" size={28} />
+                  {/*<SkipForwardCircle size={28}  />*/}
+                </button>
+              </div>
+            </div>
+            <div className="flex-1 flex items-center justify-end space-x-2">
+              <button onClick={() => toggleMute()}>
+                {renderSpeaker()}
               </button>
+              <div className={`flex`}>
+                <input type="range" min="0" max="100" value={volume} onChange={(e) => setVolume(parseInt(e.target.value))} />
+              </div>
             </div>
           </div>
         </div>
 
+      </SceneLayer >
+    </div>
 
-
-      </div>
-      {/*</div>*/}
-    </SceneLayer >
   )
 }

@@ -3,9 +3,20 @@ import path from 'path';
 import os from 'os';
 import { config } from "dotenv";
 import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
-import { atcProtocolHandler } from './protocols/atcProtocol';
+import { atcProtocolHandler, fileResponse } from './protocols/atcProtocol';
+import fs from 'fs';
 
 config({ path: '.env' });
+
+const getAssetPath = () => {
+  if (app.isPackaged) {
+    // In production, use the path relative to the executable
+    return path.join(process.resourcesPath, 'assets');
+  } else {
+    // In development, use the path relative to the project root
+    return path.join(__dirname, '..', '..', 'src', 'assets');
+  }
+};
 
 const isMac = os.platform() === "darwin";
 const isWindows = os.platform() === "win32";
@@ -79,6 +90,35 @@ const createWindow = () => {
   });
 
   protocol.handle(process.env.ATC_PROTOCOL, atcProtocolHandler)
+  protocol.handle('icon', async (request) => {
+    const url = new URL(request.url);
+    const iconName = url.hostname;
+    console.log('------------------------------------');
+    console.log(iconName);
+    console.log('------------------------------------');
+
+    const iconPath = path.join(getAssetPath(), 'phosphor-icons', 'SVGs', 'bold', iconName);
+
+    console.log(`Attempting to load icon: ${iconPath}`);
+
+    if (fs.existsSync(iconPath)) {
+      try {
+        const data = await fs.promises.readFile(iconPath);
+        console.log(`Successfully read icon file: ${iconPath}`);
+        return new Response(data, {
+          headers: {
+            'Content-Type': 'image/svg+xml',
+          }
+        });
+      } catch (error) {
+        console.error(`Error reading icon file: ${iconPath}`, error);
+        return new Response(`Error reading icon file: ${error.message}`, { status: 500 });
+      }
+    } else {
+      console.error(`Icon not found: ${iconPath}`);
+      return new Response('Icon not found', { status: 404 });
+    }
+  })
 
   installExtension(REDUX_DEVTOOLS)
     .then((name) => console.log(`Added Extension: ${name}`))
