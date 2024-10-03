@@ -1,0 +1,14 @@
+
+
+.shrunkable {
+  transition: all ease-in-out 0.5s;
+  overflow: hidden;
+}
+
+.shrunk {
+  width: 0;
+}
+
+.expanded {
+  width: 100%;
+}

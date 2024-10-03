@@ -7,6 +7,7 @@ import { Login } from "./Login";
 import { Settings } from "./Settings";
 import { Provider } from "react-redux";
 import { store } from "../store";
+import { AtcRadio } from "./AtcRadio";
 
 export const Main: React.FC = () => {
   const [downloadsPath, setDownloadsPath] = React.useState<string | null>(null);
@@ -27,8 +28,10 @@ export const Main: React.FC = () => {
     <Provider store={store}>
       <MusicProvider>
         {googleClientId && <GoogleOAuthProvider clientId={googleClientId}>
-          <BackgroundImageOverlay backgroundImageUrl="image://alaska.png" />
+          {/*<BackgroundImageOverlay backgroundImageUrl="image://alaska.png" />*/}
           <MusicPlayer />
+          {/*<AtcRadio />*/}
+          {/*<Settings />*/}
         </GoogleOAuthProvider>}
       </MusicProvider>
     </Provider>

@@ -4,7 +4,7 @@ import { getCurrentAtcTrack, nextTrack } from "../store/atc/atsSlice";
 import { AtcAnimation } from "./AtcAnimation";
 
 export const AtcRadio = () => {
-  const currentTrack = useSelector(getCurrentAtcTrack);
+  const currentAtcTrack = useSelector(getCurrentAtcTrack);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const [souerceReady, setSourceReady] = useState(false);
   const dispatch = useDispatch();
@@ -12,17 +12,20 @@ export const AtcRadio = () => {
   return (
     <div>
       <h1>ATC Radio</h1>
-      {currentTrack &&
+      {currentAtcTrack &&
         <div>
           <audio controls ref={audioElementRef} autoPlay
-            src={decodeURI(currentTrack)}
+            src={decodeURI(currentAtcTrack)}
             onCanPlay={() => setSourceReady(true)}
             onEnded={() => dispatch(nextTrack())}>
           </audio>
           <button onClick={() => dispatch(nextTrack())}>next ATC</button>
-          {souerceReady && <AtcAnimation audioElement={audioElementRef.current} />}
 
-
+          {souerceReady &&
+            <div style={{ width: '400px', height: '200px' }}>
+              <AtcAnimation audioElement={audioElementRef.current} />
+            </div>
+          }
         </div>
       }
     </div>

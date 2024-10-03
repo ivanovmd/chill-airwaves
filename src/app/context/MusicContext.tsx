@@ -18,6 +18,7 @@ export type MusicContextType = {
   pauseTrack: () => void;
   playTrack: () => void;
   isPlayng: boolean;
+  isBuffering: boolean;
 }
 
 export const MusicContext = React.createContext<MusicContextType | null>(null);
@@ -106,6 +107,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
   const [volume, setVolume] = React.useState<number>(25);
   const [isPlayng, setIsPlaying] = React.useState<boolean>(false);
   const [playlistId, setPlaylistId] = React.useState<string | null>(null);
+  const [isBuffering, setIsBuffering] = React.useState<boolean>(false);
 
   useEffect(() => {
     window.electronAPI.getEnv('YOUTUBE_PLAYLIST_ID').then((playlistId: string) => {
@@ -127,10 +129,12 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
 
   const playTrack = () => {
     youtubePlayer.playVideo()
+    setIsPlaying(true);
   }
 
   const onPlayerReady = (event: any) => {
     event.target.playVideo();
+    setIsPlaying(true);
   }
 
   async function onPlayerStateChange(event: any) {
@@ -140,16 +144,20 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
         break;
       case 0:
         console.log('Video ended');
+        setIsBuffering(false);
         break;
       case 1:
         updateVideoInfo(youtubePlayer);
+        setIsPlaying(true);
+        setIsBuffering(false);
         console.log('Video playing');
         break;
       case 2:
-        console.log('Video paused');
         setIsPlaying(false);
+        console.log('Video paused');
         break;
       case 3:
+        setIsBuffering(true);
         console.log('Video buffering');
         break;
       case 5:
@@ -225,7 +233,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
   }, [volume])
 
   return (
-    <MusicContext.Provider value={{ youtubePlayer, videoInfo, isPlayng, volume, setVolume, nextTrack, previousTrack, pauseTrack, playTrack }}>
+    <MusicContext.Provider value={{ youtubePlayer, videoInfo, isPlayng, volume, setVolume, nextTrack, previousTrack, pauseTrack, playTrack, isBuffering }}>
       {children}
     </MusicContext.Provider>
   )

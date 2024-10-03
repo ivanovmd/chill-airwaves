@@ -27,9 +27,9 @@ export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement }) => {
       audioMotionAnalyzer.registerGradient('custom', {
         bgColor: 'transparent',
         colorStops: [
-          'blue',
-          'yellow',
-          'red',
+          '#1aa04d',
+          '#1aa04d',
+          '#8ef78d',
         ]
       })
       audioMotionAnalyzer.gradient = 'custom'
@@ -44,14 +44,6 @@ export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement }) => {
   }, [audioElement, containerRef]);
 
   return (
-    <div>
-      <h1>ATC Animation Component</h1>
-
-      <div className="rounded-full" style={{ backgroundColor: 'rgba(0,0,0, 0.8)', height: '400px', width: '400px' }}>
-        <div style={{ height: '400px', width: '400px' }} ref={containerRef}></div>
-      </div>
-
-
-    </div>
+    <div className="w-full h-full" ref={containerRef}></div>
   );
 }

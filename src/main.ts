@@ -5,7 +5,6 @@ import { config } from "dotenv";
 import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { atcProtocolHandler } from './protocols/atcProtocol';
 
-
 config({ path: '.env' });
 
 const isMac = os.platform() === "darwin";
