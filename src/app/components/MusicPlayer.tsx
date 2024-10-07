@@ -9,6 +9,8 @@ import { CircleNotch, DotsThreeCircleVertical, DotsThreeVertical, Pause, PauseCi
 import { AnimatedTextLine } from "./AnimatedTextLine";
 import { AnimatedImage } from "./AminatedImage";
 import FadingImage from "./FadingImage";
+import { SoundWaves } from "./SoundWaves";
+import DancingBars from "./DancingBars";
 
 export const MusicPlayer = () => {
   const musicContext = useContext(MusicContext);
@@ -84,7 +86,10 @@ export const MusicPlayer = () => {
                 {/*<div className="relative overflow-hidden rounded-full flex-shrink-0" style={{ height: '50px', width: '50px' }}>
                   <img style={{ top: '-18%', height: '135%' }} className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" src={videoInfo?.thumbnail_url} alt="" />
                 </div>*/}
-                <FadingImage src={videoInfo?.thumbnail_url} alt="" className="music-thumbnail" />
+                <div className="relative">
+                  <FadingImage src={videoInfo?.thumbnail_url} alt="" className="music-thumbnail" />
+                  <DancingBars className="absolute inset-0 m-auto" isAnimating={isPlayng && !isBuffering} />
+                </div>
                 <div className="truncate min-w-0">
                   <AnimatedTextLine title={videoInfo?.title} id="music-title">{videoInfo?.title || '...'}</AnimatedTextLine>
                   {/*<p title={videoInfo?.title} className="truncate">{videoInfo?.title || '...'}</p>*/}

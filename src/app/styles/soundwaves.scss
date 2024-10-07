@@ -1,0 +1,68 @@
+.sound-wave {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar  {
+  height: 2px;
+  background: #ffffff; // Change the color for the bars
+  margin: 0 1.5px;
+  width: 2px; // Change the number for the bar width
+  transition: height .5s;
+  animation: none;
+}
+
+.playing .bar{
+  height: 10px;
+  animation-name: wave-lg;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+
+  &:nth-child(-n + 7),
+  &:nth-last-child(-n + 7) {
+    animation-name: wave-md;
+  }
+
+  &:nth-child(-n + 3),
+  &:nth-last-child(-n + 3) {
+    animation-name: wave-sm;
+  }
+}
+
+@keyframes wave-sm {
+  0% {
+    opacity: 0.35;
+    height: 10px;
+  }
+  100% {
+    opacity: 1;
+    height: 25px;
+  }
+}
+
+@keyframes wave-md {
+  0% {
+    opacity: 0.35;
+    height: 15px;
+  }
+  100% {
+    opacity: 1;
+    height: 50px;
+  }
+}
+
+@keyframes wave-lg {
+  0% {
+    opacity: 0.35;
+    height: 15px;
+  }
+  100% {
+    opacity: 1;
+    height: 70px;
+  }
+}
+
+

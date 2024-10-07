@@ -30,8 +30,8 @@ export const Main: React.FC = () => {
         {googleClientId && <GoogleOAuthProvider clientId={googleClientId}>
           {/*<BackgroundImageOverlay backgroundImageUrl="image://alaska.png" />*/}
           <MusicPlayer />
-          {/*<AtcRadio />*/}
-          {/*<Settings />*/}
+          <AtcRadio />
+          <Settings />
         </GoogleOAuthProvider>}
       </MusicProvider>
     </Provider>
