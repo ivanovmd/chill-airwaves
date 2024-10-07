@@ -5,10 +5,11 @@ import { AUDIO_MOTION_ANALYZER_SETTINGS } from "../../settings/audioMotionAnalyz
 
 export interface AtcAnimationProps {
   audioElement: HTMLAudioElement;
+  className?: string;
 }
 
 
-export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement }) => {
+export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement, className }) => {
   const [audioMotionAnalyzer, setAudioMotionAnalyzer] = useState<AudioMotionAnalyzer | undefined>(undefined)
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -44,6 +45,6 @@ export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement }) => {
   }, [audioElement, containerRef]);
 
   return (
-    <div className="w-full h-full" ref={containerRef}></div>
+    <div className={`w-full h-full ${className}`} ref={containerRef}></div>
   );
 }

@@ -1,10 +1,12 @@
 import anime from "animejs";
 import React, { ReactNode, useEffect, useRef } from "react";
+import AutoScroll from "./AutoScroll";
 
 interface AnimatedTextLineProps {
   children: string;
   id: string,
   title?: string,
+  className?: string,
 }
 
 function wrapLetters(text: string) {
@@ -13,8 +15,9 @@ function wrapLetters(text: string) {
   }).join('')
 }
 
-export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({ children, id, title }) => {
+export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({ children, id, title, className }) => {
   const container = useRef(null);
+  const [startAnimation, setStartAnimation] = React.useState(false);
 
   function runAnimation() {
     anime.timeline({ loop: false })
@@ -30,7 +33,13 @@ export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({ children, id
         opacity: [0, 1],
         easing: "easeInOutQuad",
         duration: 10,
-        delay: (_, i) => 30 * (i + 1)
+        delay: (_, i) => 30 * (i + 1),
+        changeComplete: () => {
+          setTimeout(() => {
+            setStartAnimation(true)
+            console.log('start animation');
+          });
+        }
       })
   }
 
@@ -38,11 +47,12 @@ export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({ children, id
     if (container.current) {
       container.current.innerHTML = wrapLetters(children)
       runAnimation()
+      setStartAnimation(false)
     }
   }, [children])
 
 
   return (
-    <div title={title} id={id} ref={container} className={`${id}_container truncate`}></div>
+    <div title={title} id={id} ref={container} className={`${id}_container ${className}`}></div>
   );
 } 

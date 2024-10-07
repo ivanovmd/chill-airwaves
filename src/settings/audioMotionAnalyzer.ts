@@ -187,73 +187,6 @@ export const AUDIO_MOTION_ANALYZER_SETTINGS: ConstructorOptions =
 
 
 
-{
-  "alphaBars": false,
-  "ansiBands": false,
-  "barSpace": 0.5,
-  "bgAlpha": 0.7,
-  "channelLayout": "single",
-  "colorMode": "gradient",
-  "fadePeaks": false,
-  "fftSize": 8192,
-  "fillAlpha": 1,
-  "frequencyScale": "log",
-  "gradientLeft": "orangered",
-  "gradientRight": "classic",
-  "gravity": 3.8,
-  "ledBars": false,
-  "linearAmplitude": false,
-  "linearBoost": 2.2,
-  "lineWidth": 0,
-  "loRes": false,
-  "lumiBars": false,
-  "maxDecibels": -10,
-  "maxFPS": 0,
-  "maxFreq": 22000,
-  "minDecibels": -70,
-  "minFreq": 20,
-  "mirror": 0,
-  "mode": 10,
-  "noteLabels": false,
-  "outlineBars": false,
-  "overlay": false,
-  "peakFadeTime": 750,
-  "peakHoldTime": 500,
-  "peakLine": false,
-  "radial": false,
-  "radialInvert": false,
-  "radius": 0.3,
-  "reflexAlpha": 1,
-  "reflexBright": 1,
-  "reflexFit": true,
-  "reflexRatio": 0.5,
-  "roundBars": false,
-  "showBgColor": false,
-  "showFPS": false,
-  "showPeaks": false,
-  "showScaleX": false,
-  "showScaleY": false,
-  "smoothing": 0.6,
-  "spinSpeed": 0,
-  "splitGradient": false,
-  "trueLeds": false,
-  "useCanvas": true,
-  "volume": 1,
-  "weightingFilter": ""
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 //{
 //  "alphaBars": false,
 //  "ansiBands": false,
@@ -265,21 +198,22 @@ export const AUDIO_MOTION_ANALYZER_SETTINGS: ConstructorOptions =
 //  "fftSize": 8192,
 //  "fillAlpha": 1,
 //  "frequencyScale": "log",
-//  "gradient": "classic",
+//  "gradientLeft": "orangered",
+//  "gradientRight": "classic",
 //  "gravity": 3.8,
-//  "ledBars": true,
+//  "ledBars": false,
 //  "linearAmplitude": false,
-//  "linearBoost": 1,
+//  "linearBoost": 2.2,
 //  "lineWidth": 0,
 //  "loRes": false,
 //  "lumiBars": false,
-//  "maxDecibels": -20,
+//  "maxDecibels": -10,
 //  "maxFPS": 0,
 //  "maxFreq": 22000,
-//  "minDecibels": -60,
+//  "minDecibels": -70,
 //  "minFreq": 20,
 //  "mirror": 0,
-//  "mode": 6,
+//  "mode": 10,
 //  "noteLabels": false,
 //  "outlineBars": false,
 //  "overlay": false,
@@ -289,17 +223,17 @@ export const AUDIO_MOTION_ANALYZER_SETTINGS: ConstructorOptions =
 //  "radial": false,
 //  "radialInvert": false,
 //  "radius": 0.3,
-//  "reflexAlpha": "1",
+//  "reflexAlpha": 1,
 //  "reflexBright": 1,
 //  "reflexFit": true,
 //  "reflexRatio": 0.5,
 //  "roundBars": false,
 //  "showBgColor": false,
 //  "showFPS": false,
-//  "showPeaks": true,
+//  "showPeaks": false,
 //  "showScaleX": false,
 //  "showScaleY": false,
-//  "smoothing": 0.5,
+//  "smoothing": 0.6,
 //  "spinSpeed": 0,
 //  "splitGradient": false,
 //  "trueLeds": false,
@@ -307,6 +241,72 @@ export const AUDIO_MOTION_ANALYZER_SETTINGS: ConstructorOptions =
 //  "volume": 1,
 //  "weightingFilter": ""
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  "alphaBars": false,
+  "ansiBands": false,
+  "barSpace": 0.5,
+  "bgAlpha": 0.7,
+  "channelLayout": "single",
+  "colorMode": "gradient",
+  "fadePeaks": false,
+  "fftSize": 8192,
+  "fillAlpha": 1,
+  "frequencyScale": "log",
+  "gradient": "classic",
+  "gravity": 3.8,
+  "ledBars": true,
+  "linearAmplitude": false,
+  "linearBoost": 1,
+  "lineWidth": 0,
+  "loRes": false,
+  "lumiBars": false,
+  "maxDecibels": -20,
+  "maxFPS": 0,
+  "maxFreq": 22000,
+  "minDecibels": -60,
+  "minFreq": 20,
+  "mirror": 0,
+  "mode": 6,
+  "noteLabels": false,
+  "outlineBars": false,
+  "overlay": false,
+  "peakFadeTime": 750,
+  "peakHoldTime": 500,
+  "peakLine": false,
+  "radial": false,
+  "radialInvert": false,
+  "radius": 0.3,
+  "reflexAlpha": "1",
+  "reflexBright": 1,
+  "reflexFit": true,
+  "reflexRatio": 0.5,
+  "roundBars": false,
+  "showBgColor": false,
+  "showFPS": false,
+  "showPeaks": false,
+  "showScaleX": false,
+  "showScaleY": false,
+  "smoothing": 0.5,
+  "spinSpeed": 0,
+  "splitGradient": false,
+  "trueLeds": false,
+  "useCanvas": true,
+  "volume": 1,
+  "weightingFilter": ""
+}
 
 
 

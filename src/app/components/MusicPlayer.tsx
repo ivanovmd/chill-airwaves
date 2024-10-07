@@ -90,19 +90,29 @@ export const MusicPlayer = () => {
                   <FadingImage src={videoInfo?.thumbnail_url} alt="" className="music-thumbnail" />
                   <DancingBars className="absolute inset-0 m-auto" isAnimating={isPlayng && !isBuffering} />
                 </div>
-                <div className="truncate min-w-0">
-                  <AnimatedTextLine title={videoInfo?.title} id="music-title">{videoInfo?.title || '...'}</AnimatedTextLine>
+                <div className="min-w-0">
+                  <div className="overflow-hidden truncate min-w-5">
+                    <AnimatedTextLine title={videoInfo?.title} id="music-title">{videoInfo?.title || '...'}</AnimatedTextLine>
+                  </div>
+
                   {/*<p title={videoInfo?.title} className="truncate">{videoInfo?.title || '...'}</p>*/}
                   <div className="flex flex-row space-x-1 items-center">
                     {/*<p title={getAutorName(videoInfo?.author_name)} className="truncate">{getAutorName(videoInfo?.author_name)} </p>*/}
-                    <AnimatedTextLine title={getAutorName(videoInfo?.author_name)} id="music-author">{getAutorName(videoInfo?.author_name)}</AnimatedTextLine>
-                    <YoutubeLogo weight="fill" style={{ paddingTop: '3px', paddingLeft: '3px' }} size={20} color="#FF0000" />
-                    <SpotifyLogo weight="fill" style={{ paddingTop: '3px' }} size={20} color="#1DB954" />
+                    <div className="overflow-hidden truncate min-w-5">
+                      <AnimatedTextLine title={getAutorName(videoInfo?.author_name)} id="music-author">{getAutorName(videoInfo?.author_name)}</AnimatedTextLine>
+                    </div>
+
+                    <div style={{ width: '20px', height: '20px' }}>
+                      <YoutubeLogo weight="fill" style={{ paddingTop: '3px', paddingLeft: '3px' }} size={20} color="#FF0000" />
+                    </div>
+                    <div style={{ width: '20px', height: '20px' }}>
+                      <SpotifyLogo weight="fill" style={{ paddingTop: '3px' }} size={20} color="#1DB954" />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex-1 flex justify-center" style={{ width: 28 * 3 + 'px' }}>
+            <div className="flex-1 flex justify-center  space-x-2" style={{ width: 28 * 3 + 'px' }}>
               <div className="flex">
                 <button onClick={() => previousTrack()}>
                   <SkipBack weight="fill" size={28} />

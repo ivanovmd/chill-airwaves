@@ -15,7 +15,7 @@ interface DancingBarsProps {
 const DancingBars: React.FC<DancingBarsProps> = ({
   isAnimating,
   minHeight = 3,
-  maxHeight = 36,
+  maxHeight = 32,
   barWidth = 3,
   barGap = 3,
   barColor = 'bg-white',
@@ -54,7 +54,7 @@ const DancingBars: React.FC<DancingBarsProps> = ({
 
   const getOpacity = (height: number, maxHeightForBar: number) => {
     if (!isAnimating) return 1;
-    return (height - minHeight) / (maxHeightForBar - minHeight) * 0.8 + 0.2;
+    return (height - minHeight) / (maxHeightForBar - minHeight) * 0.8 + 0.4;
   };
 
   return (
