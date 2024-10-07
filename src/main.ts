@@ -41,8 +41,8 @@ if (require('electron-squirrel-startup')) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 700,
+    height: 700,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -93,10 +93,6 @@ const createWindow = () => {
   protocol.handle('icon', async (request) => {
     const url = new URL(request.url);
     const iconName = url.hostname;
-    console.log('------------------------------------');
-    console.log(iconName);
-    console.log('------------------------------------');
-
     const iconPath = path.join(getAssetPath(), 'phosphor-icons', 'SVGs', 'bold', iconName);
 
     console.log(`Attempting to load icon: ${iconPath}`);

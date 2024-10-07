@@ -6,6 +6,9 @@ import { AtcRadio } from "./AtcRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedAirport, setSelectedAirportIata } from "../store/atc/atsSlice";
 import { CircleNotch, DotsThreeCircleVertical, DotsThreeVertical, Pause, PauseCircle, Play, PlayCircle, SkipBack, SkipBackCircle, SkipForward, SkipForwardCircle, SlidersHorizontal, SpeakerHigh, SpeakerLow, SpeakerNone, SpeakerX, SpotifyLogo, Vibrate, YoutubeLogo } from "@phosphor-icons/react";
+import { AnimatedTextLine } from "./AnimatedTextLine";
+import { AnimatedImage } from "./AminatedImage";
+import FadingImage from "./FadingImage";
 
 export const MusicPlayer = () => {
   const musicContext = useContext(MusicContext);
@@ -62,9 +65,13 @@ export const MusicPlayer = () => {
     }
   }
 
+  function getAutorName(rawAuthorName: string) {
+    return rawAuthorName?.replace(" - Topic", "") || '...';
+  }
+
 
   return (
-    <div className="w-screen h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://cdn.midjourney.com/eb296cb9-9475-4564-a444-f30232157973/0_0.png')" }}>
+    <div className="w-screen h-screen bg-cover bg-center absolute top-0 left-0" style={{ backgroundImage: "url('https://cdn.midjourney.com/03856099-174d-42d1-ad04-5c1c1759d5aa/0_0.png')" }}>
       <SceneLayer name="spotify-player" className="bg-gradient-to-t from-black to-transparent">
         <div className="absolute" style={{ left: '-99999px' }}>
           <div id="youtube-player"></div>
@@ -74,13 +81,16 @@ export const MusicPlayer = () => {
           <div className="w-full flex items-center py-4 px-5 min-h-16">
             <div className="flex-1 flex items-center overflow-hidden">
               <div className="flex items-center space-x-2 min-w-0">
-                <div className="relative overflow-hidden rounded-full flex-shrink-0" style={{ height: '50px', width: '50px' }}>
+                {/*<div className="relative overflow-hidden rounded-full flex-shrink-0" style={{ height: '50px', width: '50px' }}>
                   <img style={{ top: '-18%', height: '135%' }} className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" src={videoInfo?.thumbnail_url} alt="" />
-                </div>
+                </div>*/}
+                <FadingImage src={videoInfo?.thumbnail_url} alt="" className="music-thumbnail" />
                 <div className="truncate min-w-0">
-                  <p className="truncate">{videoInfo?.title || '...'}</p>
+                  <AnimatedTextLine title={videoInfo?.title} id="music-title">{videoInfo?.title || '...'}</AnimatedTextLine>
+                  {/*<p title={videoInfo?.title} className="truncate">{videoInfo?.title || '...'}</p>*/}
                   <div className="flex flex-row space-x-1 items-center">
-                    <p className="truncate">{videoInfo?.author_name.replace(" - Topic", "") || '...'} </p>
+                    {/*<p title={getAutorName(videoInfo?.author_name)} className="truncate">{getAutorName(videoInfo?.author_name)} </p>*/}
+                    <AnimatedTextLine title={getAutorName(videoInfo?.author_name)} id="music-author">{getAutorName(videoInfo?.author_name)}</AnimatedTextLine>
                     <YoutubeLogo weight="fill" style={{ paddingTop: '3px', paddingLeft: '3px' }} size={20} color="#FF0000" />
                     <SpotifyLogo weight="fill" style={{ paddingTop: '3px' }} size={20} color="#1DB954" />
                   </div>
@@ -91,7 +101,6 @@ export const MusicPlayer = () => {
               <div className="flex">
                 <button onClick={() => previousTrack()}>
                   <SkipBack weight="fill" size={28} />
-                  {/*<SkipBackCircle size={28}  />*/}
                 </button>
               </div>
 
@@ -100,10 +109,8 @@ export const MusicPlayer = () => {
                   <button onClick={handlePlayPause}>
                     {isPlayng ?
                       <Pause size={28} weight="fill" />
-                      //<PauseCircle size={28}  />
                       :
                       <Play size={28} weight="fill" />
-                      //<PlayCircle size={28}  />
                     }
                   </button>
                 }
@@ -112,7 +119,6 @@ export const MusicPlayer = () => {
               <div className="flex">
                 <button onClick={() => nextTrack()}>
                   <SkipForward weight="fill" size={28} />
-                  {/*<SkipForwardCircle size={28}  />*/}
                 </button>
               </div>
             </div>
