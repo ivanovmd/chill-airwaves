@@ -3,6 +3,12 @@ export interface Airport {
   iata: string;
   icao: string;
   restricted: boolean;
+  location: {
+    city: string;
+    country: string;
+    state?: string;
+    UTC: number;
+  },
   stations: Station[];
 }
 
@@ -14,6 +20,11 @@ export interface Station {
 export const airports: Airport[] = [
   {
     name: 'Hong Kong International Airport',
+    location: {
+      city: 'Hong Kong',
+      country: 'Hong Kong',
+      UTC: 8
+    },
     iata: 'hkg',
     icao: 'vhhh',
     restricted: false,
@@ -29,6 +40,11 @@ export const airports: Airport[] = [
     iata: 'hnd',
     icao: 'rjtt',
     restricted: false,
+    location: {
+      city: 'Tokyo',
+      country: 'Japan',
+      UTC: 9
+    },
     stations: [
       {
         name: 'App-Dep',
@@ -41,6 +57,12 @@ export const airports: Airport[] = [
     iata: 'bjc',
     icao: 'kbjc',
     restricted: false,
+    location: {
+      city: 'Denver',
+      state: 'CO',
+      country: 'United States',
+      UTC: -6
+    },
     stations: [
       {
         name: 'Gnd-Twr',

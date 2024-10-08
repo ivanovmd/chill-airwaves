@@ -11,6 +11,8 @@ import { AnimatedImage } from "./AminatedImage";
 import FadingImage from "./FadingImage";
 import { SoundWaves } from "./SoundWaves";
 import DancingBars from "./DancingBars";
+import CustomRangeInput from "./CustomRangeInput";
+import AnimatedRangeInput from "./CustomRangeInput";
 
 export const MusicPlayer = () => {
   const musicContext = useContext(MusicContext);
@@ -73,7 +75,7 @@ export const MusicPlayer = () => {
 
 
   return (
-    <div className="w-screen h-screen bg-cover bg-center absolute top-0 left-0" style={{ backgroundImage: "url('https://cdn.midjourney.com/03856099-174d-42d1-ad04-5c1c1759d5aa/0_0.png')" }}>
+    <div className="w-screen h-screen bg-cover bg-center absolute top-0 left-0" style={{ backgroundImage: "url('https://cdn.midjourney.com/3e2082dc-d578-463e-b4d4-fadc97b7165b/0_0.png')" }}>
       <SceneLayer name="spotify-player" className="bg-gradient-to-t from-black to-transparent">
         <div className="absolute" style={{ left: '-99999px' }}>
           <div id="youtube-player"></div>
@@ -142,7 +144,20 @@ export const MusicPlayer = () => {
                 {renderSpeaker()}
               </button>
               <div className={`flex`}>
-                <input type="range" min="0" max="100" value={volume} onChange={(e) => setVolume(parseInt(e.target.value))} />
+                {/*<input
+                  className="bg-green-700 transition-all duration-300"
+                  type="range"
+                  min="0" max="100"
+                  value={volume} onChange={(e) => setVolume(parseInt(e.target.value))}
+                  style={{ accentColor: 'green' }}
+                />*/}
+                <div style={{ width: '100px' }}>
+                  <CustomRangeInput
+                    min={0} max={100} value={volume} onChange={(value) => setVolume(value)} step={1}
+                    filledTrackColor="bg-green-500" thumbColor="bg-green-500"
+                  />
+                </div>
+
               </div>
             </div>
           </div>

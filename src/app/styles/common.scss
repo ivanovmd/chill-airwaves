@@ -32,14 +32,11 @@
   right: auto
 }
 
-@keyframes auto-scrolling {
-  0% {
-    right: auto;
-  }
-  50% {
-    right: 0;
-  }
-  100% {
-    right: auto;
-  }
+.text-shadow {
+  text-shadow: 1px 1px 1px black;
+}
+
+.icon-shadow {
+  -webkit-filter: drop-shadow( 1px 1px black);
+  filter: drop-shadow( 1px 1px black);
 }
