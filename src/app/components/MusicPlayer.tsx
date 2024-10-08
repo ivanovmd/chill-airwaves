@@ -13,6 +13,7 @@ import { SoundWaves } from "./SoundWaves";
 import DancingBars from "./DancingBars";
 import CustomRangeInput from "./CustomRangeInput";
 import AnimatedRangeInput from "./CustomRangeInput";
+import { VolumeSlider } from "./VolumeSlider";
 
 export const MusicPlayer = () => {
   const musicContext = useContext(MusicContext);
@@ -140,9 +141,6 @@ export const MusicPlayer = () => {
               </div>
             </div>
             <div className="flex-1 flex items-center justify-end space-x-2">
-              <button onClick={() => toggleMute()}>
-                {renderSpeaker()}
-              </button>
               <div className={`flex`}>
                 {/*<input
                   className="bg-green-700 transition-all duration-300"
@@ -151,11 +149,8 @@ export const MusicPlayer = () => {
                   value={volume} onChange={(e) => setVolume(parseInt(e.target.value))}
                   style={{ accentColor: 'green' }}
                 />*/}
-                <div style={{ width: '100px' }}>
-                  <CustomRangeInput
-                    min={0} max={100} value={volume} onChange={(value) => setVolume(value)} step={1}
-                    filledTrackColor="bg-green-500" thumbColor="bg-green-500"
-                  />
+                <div style={{ width: '140px' }}>
+                  <VolumeSlider className="icon-shadow" volume={volume} setVolume={setVolume} color="#2ebbd6" />
                 </div>
 
               </div>

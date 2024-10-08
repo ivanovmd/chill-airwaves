@@ -7,9 +7,10 @@ interface VolumeSliderProps {
   volume: number;
   setVolume: (volume: number) => void;
   className?: string;
+  color?: string;
 }
 
-export const VolumeSlider: React.FC<VolumeSliderProps> = ({ volume, setVolume, className }) => {
+export const VolumeSlider: React.FC<VolumeSliderProps> = ({ volume, setVolume, className, color = 'white' }) => {
   const [unmuteVolume, setUnmuteVolume] = useState(25);
 
   function toggleMute() {
@@ -46,7 +47,7 @@ export const VolumeSlider: React.FC<VolumeSliderProps> = ({ volume, setVolume, c
       </button>
       <CustomRangeInput
         min={0} max={100} value={volume} onChange={(value) => setVolume(value)} step={1}
-        filledTrackColor="bg-green-500" thumbColor="bg-green-500" />
+        filledTrackColor={color} thumbColor={color} />
     </div>
   );
 }

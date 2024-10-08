@@ -54,10 +54,10 @@ export const AtcRadio = () => {
   }
 
   return (
-    <div className="p-10 space-x-10 items-center 
-                    flex absolute rounded-3xl top-1/2 left-1/2 
-                    transform -translate-x-1/2 -translate-y-1/2 
-                     text-white shadow-md text-nowrap">
+    <div className="p-2 space-x-10 items-center flex absolute 
+                    rounded-full top-1/2 left-1/2 transform 
+                    -translate-x-1/2 -translate-y-1/2 backdrop-blur-2 
+                    backdrop-blur-sm bg-black/50 text-white shadow-md text-nowrap ">
       {currentAtcTrack &&
         <div>
           <audio controls ref={audioElementRef} autoPlay
@@ -70,7 +70,7 @@ export const AtcRadio = () => {
           {/*<button onClick={() => dispatch(nextTrack())}>next ATC</button>*/}
 
 
-          <div className="relative" style={{ width: '300px', height: '180px' }}>
+          <div className="relative" style={{ width: '230px', height: '180px' }}>
             {/*<div className="bg-black overflow-hidden rounded-full">
               <ATCGridBackground />
             </div>*/}
@@ -86,7 +86,7 @@ export const AtcRadio = () => {
       }
 
 
-      <div className="space-y-2 text-shadow">
+      <div className="space-y-1.5 text-shadow pr-16">
         <div className="flex space-x-2 flex-row ">
           {renderAirportName()}
         </div>
@@ -109,7 +109,7 @@ export const AtcRadio = () => {
 
         <div>
           <div style={{ width: '140px' }}>
-            <VolumeSlider className="icon-shadow" volume={volume} setVolume={handleVolumeChange} />
+            <VolumeSlider className="icon-shadow" volume={volume} setVolume={handleVolumeChange} color="#2ebbd6" />
           </div>
         </div>
       </div>

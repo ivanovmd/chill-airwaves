@@ -18,9 +18,9 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
   step,
   value,
   onChange,
-  thumbColor = 'bg-blue-500',
-  trackColor = 'bg-gray-200',
-  filledTrackColor = 'bg-blue-300',
+  thumbColor = 'white',
+  trackColor = 'white',
+  filledTrackColor = 'white',
   transitionDuration = 'transition-all duration-150'
 }) => {
   const [isDragging, setIsDragging] = useState(false);
@@ -118,12 +118,13 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
       />
       <div
         ref={rangeRef}
-        className={`w-full h-2 rounded-full ${trackColor} cursor-pointer`}
+        className={`w-full h-2 rounded-full cursor-pointer`}
+        style={{ backgroundColor: trackColor }}
         onMouseDown={handleMouseDown}
       >
         <div
-          className={`h-full rounded-full ${filledTrackColor} ${transitionDuration}`}
-          style={{ width: `${percentage}%` }}
+          className={`h-full rounded-full ${transitionDuration}`}
+          style={{ width: `${percentage}%`, backgroundColor: filledTrackColor }}
         />
       </div>
       <div
@@ -133,12 +134,13 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
         aria-valuemin={min}
         aria-valuemax={max}
         aria-valuenow={value}
-        className={`absolute w-4 h-4 rounded-full ${thumbColor} shadow cursor-grab ${isDragging ? 'cursor-grabbing' : ''
+        className={`absolute w-4 h-4 rounded-full shadow cursor-grab ${isDragging ? 'cursor-grabbing' : ''
           } ${isFocused ? 'ring-2 ring-offset-2 ring-blue-300' : ''} ${transitionDuration}`}
         style={{
           left: `calc(${percentage}% + ${(handleWidth - trackHeight) / 2}px)`,
           transform: 'translate(-50%, -50%)',
-          top: '50%'
+          top: '50%',
+          backgroundColor: thumbColor,
         }}
         onMouseDown={handleMouseDown}
         onKeyDown={handleKeyDown}

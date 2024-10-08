@@ -28,9 +28,9 @@ export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement, className })
       audioMotionAnalyzer.registerGradient('custom', {
         bgColor: 'transparent',
         colorStops: [
-          '#915477',
-          '#915477',
-          '#ff6ac3',
+          '#2ebbd6',
+          '#2ebbd6',
+          '#96eeff',
         ]
       })
       audioMotionAnalyzer.gradient = 'custom'
