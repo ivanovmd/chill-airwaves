@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 interface LiveUTCClockProps {
   utcOffset: number;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-const LiveUTCClock: React.FC<LiveUTCClockProps> = ({ utcOffset = 0 }) => {
+const LiveUTCClock: React.FC<LiveUTCClockProps> = ({ utcOffset = 0, className, style }) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -32,9 +34,9 @@ const LiveUTCClock: React.FC<LiveUTCClockProps> = ({ utcOffset = 0 }) => {
   const offsetString = utcOffset >= 0 ? `+${utcOffset}` : utcOffset;
 
   return (
-    <span>
+    <span className={className} style={style}>
       {formattedTime}
-    </span>
+    </span >
   );
 };
 

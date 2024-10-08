@@ -7,6 +7,7 @@ import { Airport, airports } from "../../settings/liveatc";
 import ATCGridSquare from "./ATCGridSquare";
 import LiveUTCClock from "./LiveUTCClock";
 import { VolumeSlider } from "./VolumeSlider";
+import ATCGridBackground from "./ATCGridBackground";
 
 
 export const AtcRadio = () => {
@@ -32,7 +33,7 @@ export const AtcRadio = () => {
     if (souerceReady) {
       return (
         <div className="flex space-x-2 items-center">
-          <AirplaneTakeoff size={28} className="icon-shadow" />
+          <AirplaneTakeoff size={28} />
           <h2>{selectedAirport.name}</h2>
         </div>
       )
@@ -70,9 +71,9 @@ export const AtcRadio = () => {
           {/*<button onClick={() => dispatch(nextTrack())}>next ATC</button>*/}
 
 
-          <div className="relative" style={{ width: '230px', height: '180px' }}>
+          <div className="relative" style={{ width: '220px', height: '180px' }}>
             {/*<div className="bg-black overflow-hidden rounded-full">
-              <ATCGridBackground />
+              <ATCGridBackground color="#2ebbd6" />
             </div>*/}
 
             <div className="h-full w-full bg-black/50 rounded-full">
@@ -86,7 +87,7 @@ export const AtcRadio = () => {
       }
 
 
-      <div className="space-y-1.5 text-shadow pr-16">
+      <div className="space-y-1.5 pr-16">
         <div className="flex space-x-2 flex-row ">
           {renderAirportName()}
         </div>
@@ -97,13 +98,13 @@ export const AtcRadio = () => {
           </p>
         </div>
 
-        <div className="flex text-shadow">
+        <div className="flex">
           <p>Location: {selectedAirport?.location?.city}, {selectedAirport?.location?.country}</p>
           {selectedAirport?.location?.state && <p>{selectedAirport?.location?.state}</p>}
         </div>
 
-        <div className="flex text-shadow">
-          <p>Local Time:  <LiveUTCClock utcOffset={selectedAirport?.location?.UTC} /></p>
+        <div className="flex">
+          <p>Local Time:  <LiveUTCClock style={{ color: '#2ebbd6' }} utcOffset={selectedAirport?.location?.UTC} /></p>
         </div>
 
 
