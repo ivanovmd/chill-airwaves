@@ -8,6 +8,7 @@ import ATCGridSquare from "./ATCGridSquare";
 import LiveUTCClock from "./LiveUTCClock";
 import { VolumeSlider } from "./VolumeSlider";
 import ATCGridBackground from "./ATCGridBackground";
+import VinylRecord from "./VinylRecord";
 
 
 export const AtcRadio = () => {
@@ -58,7 +59,8 @@ export const AtcRadio = () => {
     <div className="p-2 space-x-10 items-center flex absolute 
                     rounded-full top-1/2 left-1/2 transform 
                     -translate-x-1/2 -translate-y-1/2 backdrop-blur-2 
-                    backdrop-blur-sm bg-black/50 text-white shadow-md text-nowrap ">
+                    backdrop-blur-sm bg-black/50 text-white shadow-md text-nowrap text-center">
+
       {currentAtcTrack &&
         <div>
           <audio controls ref={audioElementRef} autoPlay
@@ -71,7 +73,7 @@ export const AtcRadio = () => {
           {/*<button onClick={() => dispatch(nextTrack())}>next ATC</button>*/}
 
 
-          <div className="relative" style={{ width: '220px', height: '180px' }}>
+          <div className="relative" style={{ width: '300px', height: '300px' }}>
             {/*<div className="bg-black overflow-hidden rounded-full">
               <ATCGridBackground color="#2ebbd6" />
             </div>*/}
@@ -87,8 +89,8 @@ export const AtcRadio = () => {
       }
 
 
-      <div className="space-y-1.5 pr-16">
-        <div className="flex space-x-2 flex-row ">
+      <div className="space-y-1.5 text-center">
+        <div className="flex space-x-2 flex-row">
           {renderAirportName()}
         </div>
 
@@ -98,23 +100,27 @@ export const AtcRadio = () => {
           </p>
         </div>
 
-        <div className="flex">
+        <div>
           <p>Location: {selectedAirport?.location?.city}, {selectedAirport?.location?.country}</p>
           {selectedAirport?.location?.state && <p>{selectedAirport?.location?.state}</p>}
         </div>
 
-        <div className="flex">
+        <div>
           <p>Local Time:  <LiveUTCClock style={{ color: '#2ebbd6' }} utcOffset={selectedAirport?.location?.UTC} /></p>
         </div>
 
 
-        <div>
+        <div className="flex flex-row items-center justify-center">
           <div style={{ width: '140px' }}>
             <VolumeSlider className="icon-shadow" volume={volume} setVolume={handleVolumeChange} color="#2ebbd6" />
           </div>
         </div>
+
       </div>
 
+      <VinylRecord size={300} >
+        <img src="https://cdn.midjourney.com/d25336d0-bc3b-40a3-8aba-33b2e607a5cc/0_0.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      </VinylRecord>
     </div>
   );
 }

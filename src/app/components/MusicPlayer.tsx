@@ -42,34 +42,6 @@ export const MusicPlayer = () => {
     }
   }
 
-
-  function renderSpeaker() {
-    if (volume === 0) {
-      return <SpeakerX weight="fill" size={28} />
-    }
-
-    if (volume < 25) {
-      return <SpeakerNone weight="fill" size={28} />
-    }
-
-    if (volume < 50 && volume >= 25) {
-      return <SpeakerLow weight="fill" size={28} />
-    }
-
-    if (volume >= 50) {
-      return <SpeakerHigh weight="fill" size={28} />
-    }
-  }
-
-  function toggleMute() {
-    if (volume === 0) {
-      setVolume(unmuteVolume);
-    } else {
-      setUnmuteVolume(volume);
-      setVolume(0);
-    }
-  }
-
   function getAutorName(rawAuthorName: string) {
     return rawAuthorName?.replace(" - Topic", "") || '...';
   }

@@ -33,7 +33,7 @@ const ATCGridSquare: React.FC<ATCGridSquareProps> = ({ color = '#2ebbd6' }) => {
 
   return (
     <div
-      className="relative rounded-full w-full h-full bg-transparent border-2 overflow-hidden"
+      className="relative rounded-3xl w-full h-full bg-transparent border-2 overflow-hidden"
       style={{ ...styles.container, borderColor: color }}
     >
       {/* Vertical lines */}

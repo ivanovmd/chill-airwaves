@@ -1,0 +1,101 @@
+.vinyl-record {
+  position: relative;
+  --black: #000000;
+  --dark-gray: #1a1a1a;
+  --medium-gray: #2c2c2c;
+  --light-gray: #3f3f3f;
+}
+
+.rotating-container {
+  position: absolute;
+  inset: 0;
+  animation: spin var(--rotation-speed) linear infinite;
+}
+
+.outer-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--medium-gray), var(--black));
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.vinyl-surface {
+  position: absolute;
+  inset: calc(2px * var(--scale));
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--black), var(--dark-gray));
+  overflow: hidden;
+}
+
+.shiny-effect {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0.2;
+}
+
+.vinyl-groove {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--light-gray);
+  opacity: 0.3;
+}
+
+.album-cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(128px * var(--scale));
+  height: calc(128px * var(--scale));
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--light-gray);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.center-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(18px * var(--scale));
+  height: calc(18px * var(--scale));
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: var(--black);
+  border: 1px solid var(--light-gray);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  z-index: 11;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-record {
+
+  .center-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(128px * var(--scale));
+    height: calc(128px * var(--scale));
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #fff; // Default background, can be overridden
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; // Ensure it's above the vinyl surface
+  }
+
+}
