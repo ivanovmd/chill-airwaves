@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentAtcTrack, getSelectedAirport, nextTrack, setSelectedAirportIata } from "../store/atc/atsSlice";
 import { Airport, airports } from "../../../src/settings/liveatc";
 import { AtcAnimation } from "./AtcAnimation";
+import { VolumeSlider } from "./VolumeSlider";
+import { HiddenVolumeSlider } from "./HiddenVolumeSlider";
 
 export const TestLayout = () => {
   const currentAtcTrack = useSelector(getCurrentAtcTrack);
@@ -41,7 +43,7 @@ export const TestLayout = () => {
       >
       </audio>
 
-      <div className="flex-grow flex relative flex-col bg-gradient-to-t from-black to-transparent p-10 overflow-hidden  backdrop-blur-sm">
+      <div className="flex-grow flex relative flex-col bg-gradient-to-t from-black to-transparent p-20 overflow-hidden  backdrop-blur-sm">
 
         <button className="text-center space-x-2 mb-6 text-xl">
           <span><AirplaneTakeoff className="inline" size={28} /></span>
@@ -55,13 +57,13 @@ export const TestLayout = () => {
         </button>
 
         <div id="radar-container" className="flex-grow relative">
-          <div id="radar" className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl" style={{ color: "#be56c5" }}>
-            <ATCGridSquare color="#be56c5" />
+          <div id="radar" className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl" style={{ color: "#06b6d4" }}>
+            <ATCGridSquare color="#06b6d4" />
 
-            <AtcAnimation className="absolute top-0 left-0" audioElement={audioElementRef.current} />
+            <AtcAnimation color="#06b6d4" className="absolute top-0 left-0" audioElement={audioElementRef.current} />
 
             <button className="absolute top-4 right-4">
-              <SpeakerHigh size={28} color="#be56c5" />
+              <HiddenVolumeSlider volume={volume} setVolume={setVolume} color="#06b6d4" />
             </button>
 
             <button className="absolute top-4 left-4 flex items-center space-x-1">
@@ -97,7 +99,9 @@ export const TestLayout = () => {
                 <Pause size={28} />
                 <SkipForward size={28} />
               </div>
-              <SpeakerHigh size={28} />
+
+
+              <HiddenVolumeSlider volume={volume} setVolume={setVolume} color="#06b6d4" />
             </div>
           </div>
         </div>

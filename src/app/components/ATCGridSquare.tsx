@@ -15,7 +15,7 @@ const ATCGridSquare: React.FC<ATCGridSquareProps> = ({ color = '#2ebbd6' }) => {
 
   const styles = {
     container: {
-      background: `radial-gradient(circle, transparent 30%, ${getRGBA(0.1)} 70%, ${getRGBA(0.3)} 100%)`
+      //background: `radial-gradient(circle, transparent 30%, ${getRGBA(0.1)} 70%, ${getRGBA(0.3)} 100%)`
     },
     line: {
       background: `linear-gradient(to bottom, transparent, ${color} 50%, transparent)`,
@@ -60,7 +60,7 @@ const ATCGridSquare: React.FC<ATCGridSquareProps> = ({ color = '#2ebbd6' }) => {
 
       {/* Moving radar line */}
       <div
-        className="absolute top-0 bottom-0 w-1"
+        className="absolute top-0 bottom-0 w-1 "
         style={{
           ...styles.radarLine,
           animation: 'radarSweep 10s linear infinite alternate',

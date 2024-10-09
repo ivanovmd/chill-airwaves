@@ -47,7 +47,7 @@ export const VolumeSlider: React.FC<VolumeSliderProps> = ({ volume, setVolume, c
       </button>
       <CustomRangeInput
         min={0} max={100} value={volume} onChange={(value) => setVolume(value)} step={1}
-        filledTrackColor={color} thumbColor={color} />
+        filledTrackColor={color} thumbColor={color} style={{ minWidth: '100px' }} />
     </div>
   );
 }

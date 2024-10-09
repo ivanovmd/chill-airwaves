@@ -10,6 +10,8 @@ interface CustomRangeInputProps {
   trackColor?: string;
   filledTrackColor?: string;
   transitionDuration?: string;
+  style?: React.CSSProperties;
+  className?: string;
 }
 
 const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
@@ -21,7 +23,9 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
   thumbColor = 'white',
   trackColor = 'white',
   filledTrackColor = 'white',
-  transitionDuration = 'transition-all duration-150'
+  transitionDuration = 'transition-all duration-150',
+  className = '',
+  style = {},
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -106,7 +110,7 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
   }, [isDragging]);
 
   return (
-    <div className="relative w-full h-6 flex items-center">
+    <div className={`relative w-full h-6 flex items-center ${className}`} style={style}>
       <input
         type="range"
         min={min}

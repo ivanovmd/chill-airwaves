@@ -6,10 +6,11 @@ import { AUDIO_MOTION_ANALYZER_SETTINGS } from "../../settings/audioMotionAnalyz
 export interface AtcAnimationProps {
   audioElement: HTMLAudioElement;
   className?: string;
+  color?: string;
 }
 
 
-export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement, className }) => {
+export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement, className, color }) => {
   const [audioMotionAnalyzer, setAudioMotionAnalyzer] = useState<AudioMotionAnalyzer | undefined>(undefined)
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -28,9 +29,9 @@ export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement, className })
       audioMotionAnalyzer.registerGradient('custom', {
         bgColor: 'transparent',
         colorStops: [
-          '#be56c5',
-          '#be56c5',
-          '#be56c5',
+          color || 'rgb(2 132 199)',
+          color || 'rgb(2 132 199)',
+          color || 'rgb(2 132 199)',
         ]
       })
       audioMotionAnalyzer.gradient = 'custom'

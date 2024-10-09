@@ -1,0 +1,31 @@
+.volume-slider-button {
+  position: relative;
+  z-index: 2;
+}
+
+.volume-slider {
+  transition: all 0.5s;
+  z-index: 10;
+}
+
+.volume-slider-control {
+  opacity: 1;
+  transition: all 0.5s;
+  overflow: hidden;
+  padding: 12px 16px;
+  padding-right: 50px;
+  right: -10px;
+  border-radius: 18px;
+}
+
+.hidden-slider {
+  .volume-slider-control {
+    opacity: 0;
+  }
+}
+
+
+//.volume-slider-control {
+//  width: 0 !important;
+//  padding: 0;
+//}
