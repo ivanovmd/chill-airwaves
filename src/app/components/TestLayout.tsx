@@ -8,6 +8,8 @@ import { Airport, airports } from "../../../src/settings/liveatc";
 import { AtcAnimation } from "./AtcAnimation";
 import { VolumeSlider } from "./VolumeSlider";
 import { HiddenVolumeSlider } from "./HiddenVolumeSlider";
+import ScrollingContainer from "./ScrollingContainer";
+import { AnimatedTextLine } from "./AnimatedTextLine";
 
 export const TestLayout = () => {
   const currentAtcTrack = useSelector(getCurrentAtcTrack);
@@ -17,6 +19,8 @@ export const TestLayout = () => {
   const selectedAirportIata = useSelector(getSelectedAirport);
   const [selectedAirport, setSelectedAirport] = useState<Airport>();
   const [volume, setVolume] = useState(50);
+  const [scrollContent, setScrollContent] = useState('Hong Kong International Airport');
+  const [playVinylAnimation, setPlayVinylAnimation] = useState(false);
 
   useEffect(() => {
     setSourceReady(false);
@@ -30,6 +34,10 @@ export const TestLayout = () => {
 
   useEffect(() => {
     dispatch(setSelectedAirportIata('hkg'))
+
+    setTimeout(() => {
+      setScrollContent('Los Angeles International Airport a very long name');
+    }, 10000);
   }, []);
 
   return (
@@ -45,10 +53,18 @@ export const TestLayout = () => {
 
       <div className="flex-grow flex relative flex-col bg-gradient-to-t from-black to-transparent p-20 overflow-hidden  backdrop-blur-sm">
 
-        <button className="text-center space-x-2 mb-6 text-xl">
-          <span><AirplaneTakeoff className="inline" size={28} /></span>
-          <span>Hong Kong International Airport</span>
-          <span><CaretDown className="inline" size={18} /></span>
+        <button className="truncate whitespace-nowrap text-center space-x-2 mb-6 text-xl">
+          <div className="flex space-x-2 items-center">
+            <AirplaneTakeoff size={28} className="flex-shrink-0" />
+            <div className="truncate">
+              <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
+                <AnimatedTextLine id="airport-name">
+                  {scrollContent}
+                </AnimatedTextLine>
+              </ScrollingContainer>
+            </div>
+            <CaretDown className="flex-shrink-0" size={18} />
+          </div>
         </button>
 
 
@@ -62,13 +78,13 @@ export const TestLayout = () => {
 
             <AtcAnimation color="#06b6d4" className="absolute top-0 left-0" audioElement={audioElementRef.current} />
 
-            <button className="absolute top-4 right-4">
+            <div className="absolute top-4 right-4">
               <HiddenVolumeSlider volume={volume} setVolume={setVolume} color="#06b6d4" />
-            </button>
+            </div>
 
-            <button className="absolute top-4 left-4 flex items-center space-x-1">
+            <div className="absolute top-4 left-4 flex items-center space-x-1">
               <div>HKG</div>
-            </button>
+            </div>
 
             <div className="absolute bottom-4 left-4 text-xs">
               <p>Hong Kong, Hong Kong</p>
@@ -81,16 +97,31 @@ export const TestLayout = () => {
         </div>
 
         <div id="player-container" className="mt-10 w-full flex space-x-4">
-          <VinylRecord size={100}>
-            <img src="https://cdn.midjourney.com/d25336d0-bc3b-40a3-8aba-33b2e607a5cc/0_0.png" alt="" className="w-full h-full object-cover" />
-          </VinylRecord>
+          <div className="flex-shrink-0" onClick={() => setPlayVinylAnimation(!playVinylAnimation)}>
+            <VinylRecord isPlaying={playVinylAnimation} size={100}>
+              <img src="https://cdn.midjourney.com/d25336d0-bc3b-40a3-8aba-33b2e607a5cc/0_0.png" alt="" className="w-full h-full object-cover" />
+            </VinylRecord>
+          </div>
+
 
           <div id="track-info" className="flex-grow space-y-1">
-            <p>This is a sunny track</p>
-            <div className="flex space-x-2">
-              <p className="text-sm text-gray-300">By: John Doe</p>
-              <YoutubeLogo size={20} color="#FF0000" weight="fill" />
-              <SpotifyLogo size={20} color="#1DB954" weight="fill" />
+            <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
+              <AnimatedTextLine id="track-name">
+                This is a sunny track
+              </AnimatedTextLine>
+            </ScrollingContainer>
+
+            <div className="flex space-x-2 items-center">
+              <div className="text-sm text-gray-300">
+                <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
+                  <AnimatedTextLine id="author-name">
+                    By: John Doe
+                  </AnimatedTextLine>
+                </ScrollingContainer>
+              </div>
+
+              <YoutubeLogo className="flex-shrink-0" size={20} color="#FF0000" weight="fill" />
+              <SpotifyLogo className="flex-shrink-0" size={20} color="#1DB954" weight="fill" />
             </div>
 
             <div className="flex justify-between pt-1">
@@ -106,6 +137,6 @@ export const TestLayout = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

@@ -1,24 +1,70 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import '../styles/vinyl-record.scss';
 
 interface VinylRecordProps {
   children: React.ReactNode;
   size?: number; // Size in pixels
-  rotationSpeed?: number; // Rotation speed in seconds
+  rotationSpeed?: number; // Rotation speed in degrees per second
+  className?: string;
+  isPlaying?: boolean; // Control whether the record is spinning
 }
 
-const VinylRecord: React.FC<VinylRecordProps> = ({ children, size = 320, rotationSpeed = 10 }) => {
+const VinylRecord: React.FC<VinylRecordProps> = ({
+  children,
+  className = '',
+  size = 320,
+  rotationSpeed = 36, // 360 degrees in 10 seconds by default
+  isPlaying = true
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number>();
+  const lastTimeRef = useRef<number>(0);
+  const rotationRef = useRef<number>(0);
   const scale = size / 320; // Base scale factor
 
+  const [rotation, setRotation] = useState(0);
+
+  const animate = (time: number) => {
+    if (lastTimeRef.current !== undefined) {
+      const deltaTime = time - lastTimeRef.current;
+      rotationRef.current = (rotationRef.current + rotationSpeed * deltaTime / 1000) % 360;
+      setRotation(rotationRef.current);
+    }
+    lastTimeRef.current = time;
+    animationRef.current = requestAnimationFrame(animate);
+  };
+
+  useEffect(() => {
+    if (isPlaying) {
+      lastTimeRef.current = performance.now();
+      animationRef.current = requestAnimationFrame(animate);
+    } else {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    }
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isPlaying, rotationSpeed]);
+
   return (
-    <div className="vinyl-record" style={{
-      width: size,
-      height: size,
-      '--rotation-speed': `${rotationSpeed}s`,
-      '--scale': scale
-    } as React.CSSProperties}>
+    <div
+      className={`vinyl-record ${className}`}
+      style={{
+        width: size,
+        height: size,
+        '--scale': scale
+      } as React.CSSProperties}
+    >
       {/* Rotating container */}
-      <div className="rotating-container">
+      <div
+        ref={containerRef}
+        className="rotating-container"
+        style={{ transform: `rotate(${rotation}deg)` }}
+      >
         {/* Outer ring */}
         <div className="outer-ring"></div>
 

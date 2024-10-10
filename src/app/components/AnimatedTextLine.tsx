@@ -4,7 +4,7 @@ import AutoScroll from "./AutoScroll";
 
 interface AnimatedTextLineProps {
   children: string;
-  id: string,
+  id?: string,
   title?: string,
   className?: string,
 }
@@ -37,7 +37,6 @@ export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({ children, id
         changeComplete: () => {
           setTimeout(() => {
             setStartAnimation(true)
-            console.log('start animation');
           });
         }
       })

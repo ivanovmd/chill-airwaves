@@ -16,16 +16,13 @@
   padding-right: 50px;
   right: -10px;
   border-radius: 18px;
+  visibility: visible;
 }
 
 .hidden-slider {
   .volume-slider-control {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
-
-//.volume-slider-control {
-//  width: 0 !important;
-//  padding: 0;
-//}

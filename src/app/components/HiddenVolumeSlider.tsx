@@ -47,7 +47,7 @@ export const HiddenVolumeSlider: React.FC<VolumeSliderProps> = ({ volume, setVol
       onMouseOver={() => !isHidden && setIsHidden(false)}
       onMouseLeave={() => setIsHidden(true)}
     >
-      <div className="volume-slider-control absolute bg-black/50">
+      <div className="volume-slider-control absolute bg-black/50 backdrop-blur-md">
         <CustomRangeInput
           min={0} max={100} value={volume} onChange={(value) => setVolume(value)} step={1}
           filledTrackColor={color} thumbColor={color} style={{ minWidth: '100px' }} />
