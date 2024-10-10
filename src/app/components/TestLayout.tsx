@@ -10,6 +10,8 @@ import { VolumeSlider } from "./VolumeSlider";
 import { HiddenVolumeSlider } from "./HiddenVolumeSlider";
 import ScrollingContainer from "./ScrollingContainer";
 import { AnimatedTextLine } from "./AnimatedTextLine";
+import { AnimatedImage } from "./AminatedImage";
+import FadingImage from "./FadingImage";
 
 export const TestLayout = () => {
   const currentAtcTrack = useSelector(getCurrentAtcTrack);
@@ -54,7 +56,7 @@ export const TestLayout = () => {
       <div className="flex-grow flex relative flex-col bg-gradient-to-t from-black to-transparent p-20 overflow-hidden  backdrop-blur-sm">
 
         <button className="truncate whitespace-nowrap text-center space-x-2 mb-6 text-xl">
-          <div className="flex space-x-2 items-center">
+          <div className="flex space-x-2 items-center" title={scrollContent}>
             <AirplaneTakeoff size={28} className="flex-shrink-0" />
             <div className="truncate">
               <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
@@ -96,32 +98,41 @@ export const TestLayout = () => {
           </div>
         </div>
 
-        <div id="player-container" className="mt-10 w-full flex space-x-4">
+        <div id="player-container" className="mt-10 w-full flex space-x-4 items-center">
+
           <div className="flex-shrink-0" onClick={() => setPlayVinylAnimation(!playVinylAnimation)}>
             <VinylRecord isPlaying={playVinylAnimation} size={100}>
-              <img src="https://cdn.midjourney.com/d25336d0-bc3b-40a3-8aba-33b2e607a5cc/0_0.png" alt="" className="w-full h-full object-cover" />
+              <FadingImage src="https://cdn.midjourney.com/d25336d0-bc3b-40a3-8aba-33b2e607a5cc/0_0.png" alt="" className="w-full h-full object-cover" />
             </VinylRecord>
           </div>
 
 
-          <div id="track-info" className="flex-grow space-y-1">
-            <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
-              <AnimatedTextLine id="track-name">
-                This is a sunny track
-              </AnimatedTextLine>
-            </ScrollingContainer>
+          <div id="track-info" className="space-y-1 truncate">
+            <div>
+              <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
+                <AnimatedTextLine id="track-name">
+                  This is a sunny track long name
+                </AnimatedTextLine>
+              </ScrollingContainer>
+            </div>
 
-            <div className="flex space-x-2 items-center">
-              <div className="text-sm text-gray-300">
+
+            <div className="flex space-x-2 items-center max-w-full">
+              <div className="text-sm text-gray-300 truncate">
                 <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
                   <AnimatedTextLine id="author-name">
-                    By: John Doe
+                    By: John Doe John Doe John Doe John Doe John Doe
                   </AnimatedTextLine>
                 </ScrollingContainer>
               </div>
 
-              <YoutubeLogo className="flex-shrink-0" size={20} color="#FF0000" weight="fill" />
-              <SpotifyLogo className="flex-shrink-0" size={20} color="#1DB954" weight="fill" />
+              <div className="flex-shrink-0">
+                <YoutubeLogo size={20} color="#FF0000" weight="fill" />
+              </div>
+
+              <div className="flex-shrink-0">
+                <SpotifyLogo size={20} color="#1DB954" weight="fill" />
+              </div>
             </div>
 
             <div className="flex justify-between pt-1">
@@ -130,8 +141,6 @@ export const TestLayout = () => {
                 <Pause size={28} />
                 <SkipForward size={28} />
               </div>
-
-
               <HiddenVolumeSlider volume={volume} setVolume={setVolume} color="#06b6d4" />
             </div>
           </div>
