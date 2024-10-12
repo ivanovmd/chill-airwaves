@@ -1,7 +1,7 @@
 import { SpeakerHigh, SpeakerLow, SpeakerNone, SpeakerX } from "@phosphor-icons/react";
 import React, { useState } from "react";
 import CustomRangeInput from "./CustomRangeInput";
-import '../styles/hidden-volume-slider.scss';
+import '../../styles/hidden-volume-slider.scss';
 
 
 interface VolumeSliderProps {
