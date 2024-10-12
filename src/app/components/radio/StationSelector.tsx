@@ -14,8 +14,8 @@ interface AnimatedTextLineProps {
 
 export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, onClick }) => {
   return (
-    <button title={airportName} className="truncate whitespace-nowrap text-center space-x-2 mb-6 text-xl" onClick={onClick}>
-      <div className="flex space-x-2 items-center" >
+    <button title={airportName} className="text-center space-x-2 mb-6 text-xl w-full" onClick={onClick}>
+      <div className="flex space-x-2 items-center mx-auto justify-center">
         <AirplaneTakeoff size={28} className="flex-shrink-0" />
         <div className="truncate">
           <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>

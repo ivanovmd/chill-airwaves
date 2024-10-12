@@ -31,7 +31,7 @@ const FadingImage: React.FC<FadingImageProps> = ({ src, alt, className = '', tit
   };
 
   return (
-    <div title={title} className="relative rounded-full flex-shrink-0" style={{ height: '40px', width: '40px' }}>
+    <div title={title} className="relative rounded-full flex-shrink-0 bg-black" style={{ height: '40px', width: '40px' }}>
       <img src={currentSrc} alt={alt} onLoad={handleImageLoad} style={{ top: '-18%', height: '135%' }}
         className={`${className} ${fadeIn ? 'opacity-100' : 'opacity-40'} transition-opacity duration-300 ease-in absolute inset-0 w-full h-full object-cover object-center pointer-events-none`} />
     </div>

@@ -35,7 +35,7 @@ export const TestLayout = () => {
   const { setVolume, nextTrack, playTrack, pauseTrack, previousTrack, volume, videoInfo, isPlayng, isBuffering } = musicContext;
 
   function getAutorName(rawAuthorName: string) {
-    return rawAuthorName?.replace(" - Topic", "") || '...';
+    return rawAuthorName?.replace(" - Topic", "");
   }
 
   useEffect(() => {

@@ -59,7 +59,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ onPause, onPlay, onNex
         </VinylRecord>
       </div>
 
-      <div id="track-info" className="space-y-1 truncate w-full">
+      <div id="track-info" className="space-y-1 flex-1 min-w-0">
         <div>
           <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
             <AnimatedTextLine id="track-name">
@@ -70,7 +70,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ onPause, onPlay, onNex
 
 
         <div className="flex space-x-2 items-center max-w-full">
-          <div className="text-sm text-gray-300 truncate">
+          <div className="text-sm text-gray-300 min-w-0">
             <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
               <AnimatedTextLine onAnimationEnd={() => setShowSocials(true)} id="author-name">
                 {authorName}
@@ -83,7 +83,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ onPause, onPlay, onNex
           </div>
 
           <div className="flex-shrink-0">
-            <a hidden={!showSocials} className="animate__animated animate__faster animate__fadeIn" href={spotifyLink} target="_blank"><SpotifyLogo size={20} color="#1DB954" weight="fill" /></a>
+            <a hidden={!showSocials} className="animate__animated animate__faster animate__fadeIn animate__delay-015s" href={spotifyLink} target="_blank"><SpotifyLogo size={20} color="#1DB954" weight="fill" /></a>
           </div>
         </div>
 
@@ -98,7 +98,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ onPause, onPlay, onNex
             <button onClick={onNextTrack}><SkipForward size={28} /></button>
           </div>
 
-          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color="#ca3b6b" />
+          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color="#ca3b6b" className="ml-2" />
         </div>
       </div>
     </div>
