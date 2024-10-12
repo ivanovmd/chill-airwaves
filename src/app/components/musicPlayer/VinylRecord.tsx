@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import '../styles/vinyl-record.scss';
+import '../../styles/vinyl-record.scss';
 
 interface VinylRecordProps {
   children: React.ReactNode;

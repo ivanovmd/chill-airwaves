@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { SceneLayer } from "./Scene";
 import { MusicContext } from "../context/MusicContext";
 import { Settings } from "./Settings";
-import { AtcRadio } from "./AtcRadio";
+import { AtcRadio } from "./radio/AtcRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedAirport, setSelectedAirportIata } from "../store/atc/atsSlice";
 import { CircleNotch, DotsThreeCircleVertical, DotsThreeVertical, Pause, PauseCircle, Play, PlayCircle, SkipBack, SkipBackCircle, SkipForward, SkipForwardCircle, SlidersHorizontal, SpeakerHigh, SpeakerLow, SpeakerNone, SpeakerX, SpotifyLogo, Vibrate, YoutubeLogo } from "@phosphor-icons/react";

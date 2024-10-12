@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentAtcTrack, getSelectedAirport, nextTrack } from "../store/atc/atsSlice";
+import { getCurrentAtcTrack, getSelectedAirport, nextTrack } from "../../store/atc/atsSlice";
 import { AtcAnimation } from "./AtcAnimation";
 import { AirplaneTakeoff, CircleNotch } from "@phosphor-icons/react";
-import { Airport, airports } from "../../settings/liveatc";
+import { Airport, airports } from "../../../settings/liveatc";
 import ATCGridSquare from "./ATCGridSquare";
-import LiveUTCClock from "./LiveUTCClock";
-import { VolumeSlider } from "./VolumeSlider";
+import LiveUTCClock from "../LiveUTCClock";
+import { VolumeSlider } from "../VolumeSlider";
 import ATCGridBackground from "./ATCGridBackground";
-import VinylRecord from "./VinylRecord";
+import VinylRecord from "../musicPlayer/VinylRecord";
 
 
 export const AtcRadio = () => {

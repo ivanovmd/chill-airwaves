@@ -7,6 +7,7 @@ interface AnimatedTextLineProps {
   id?: string,
   title?: string,
   className?: string,
+  onAnimationEnd?: () => void
 }
 
 function wrapLetters(text: string) {
@@ -15,7 +16,7 @@ function wrapLetters(text: string) {
   }).join('')
 }
 
-export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({ children, id, title, className }) => {
+export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({ children, id, title, className, onAnimationEnd }) => {
   const container = useRef(null);
   const [startAnimation, setStartAnimation] = React.useState(false);
 
@@ -35,6 +36,7 @@ export const AnimatedTextLine: React.FC<AnimatedTextLineProps> = ({ children, id
         duration: 10,
         delay: (_, i) => 30 * (i + 1),
         changeComplete: () => {
+          onAnimationEnd && onAnimationEnd()
           setTimeout(() => {
             setStartAnimation(true)
           });

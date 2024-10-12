@@ -7,7 +7,7 @@ import { Login } from "./Login";
 import { Settings } from "./Settings";
 import { Provider } from "react-redux";
 import { store } from "../store";
-import { AtcRadio } from "./AtcRadio";
+import { AtcRadio } from "./radio/AtcRadio";
 import { TestLayout } from "./TestLayout";
 
 export const Main: React.FC = () => {

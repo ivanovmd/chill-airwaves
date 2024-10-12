@@ -19,7 +19,7 @@ export interface Station {
 
 export const airports: Airport[] = [
   {
-    name: 'Hong Kong International Airport',
+    name: 'Hong Kong Intl Airport',
     location: {
       city: 'Hong Kong',
       country: 'Hong Kong',
@@ -36,7 +36,7 @@ export const airports: Airport[] = [
     ]
   },
   {
-    name: 'Tokyo International Airport (Haneda Airport)',
+    name: 'Tokyo Intl Airport (Haneda Airport)',
     iata: 'hnd',
     icao: 'rjtt',
     restricted: false,

@@ -1,6 +1,6 @@
 import AudioMotionAnalyzer from "audiomotion-analyzer";
 import React, { FC, useEffect, useRef, useState } from "react";
-import { AUDIO_MOTION_ANALYZER_SETTINGS } from "../../settings/audioMotionAnalyzer";
+import { AUDIO_MOTION_ANALYZER_SETTINGS } from "../../../settings/audioMotionAnalyzer";
 
 
 export interface AtcAnimationProps {
