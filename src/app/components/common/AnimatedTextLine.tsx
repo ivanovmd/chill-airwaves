@@ -1,6 +1,5 @@
 import anime from "animejs";
 import React, { ReactNode, useEffect, useRef } from "react";
-import AutoScroll from "./AutoScroll";
 
 interface AnimatedTextLineProps {
   children: string;

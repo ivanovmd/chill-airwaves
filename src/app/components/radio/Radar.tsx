@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSelectedAirport, nextTrack, getCurrentAtcTrack } from "../../store/atc/atsSlice";
 import ATCGridSquare from "./ATCGridSquare";
 import { AtcAnimation } from "./AtcAnimation";
-import { HiddenVolumeSlider } from "../HiddenVolumeSlider";
-import LiveUTCClock from "../LiveUTCClock";
+import { HiddenVolumeSlider } from "../common/HiddenVolumeSlider";
+import LiveUTCClock from "../common/LiveUTCClock";
 import { Airport, airports } from "../../../settings/liveatc";
 
 interface RadarProps {

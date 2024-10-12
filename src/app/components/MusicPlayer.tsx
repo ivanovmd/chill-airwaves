@@ -1,19 +1,13 @@
 import React, { useContext, useEffect } from "react"
 import { SceneLayer } from "./Scene";
 import { MusicContext } from "../context/MusicContext";
-import { Settings } from "./Settings";
-import { AtcRadio } from "./radio/AtcRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedAirport, setSelectedAirportIata } from "../store/atc/atsSlice";
-import { CircleNotch, DotsThreeCircleVertical, DotsThreeVertical, Pause, PauseCircle, Play, PlayCircle, SkipBack, SkipBackCircle, SkipForward, SkipForwardCircle, SlidersHorizontal, SpeakerHigh, SpeakerLow, SpeakerNone, SpeakerX, SpotifyLogo, Vibrate, YoutubeLogo } from "@phosphor-icons/react";
-import { AnimatedTextLine } from "./AnimatedTextLine";
-import { AnimatedImage } from "./AminatedImage";
-import FadingImage from "./FadingImage";
-import { SoundWaves } from "./SoundWaves";
+import { CircleNotch, Pause, Play, SkipBack, SkipForward, SpotifyLogo, YoutubeLogo } from "@phosphor-icons/react";
+import { AnimatedTextLine } from "./common/AnimatedTextLine";
+import FadingImage from "./common/FadingImage";
 import DancingBars from "./DancingBars";
-import CustomRangeInput from "./CustomRangeInput";
-import AnimatedRangeInput from "./CustomRangeInput";
-import { VolumeSlider } from "./VolumeSlider";
+import { VolumeSlider } from "./common/VolumeSlider";
 
 export const MusicPlayer = () => {
   const musicContext = useContext(MusicContext);

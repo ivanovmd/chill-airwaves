@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import VinylRecord from "./VinylRecord";
-import FadingImage from "../FadingImage";
+import FadingImage from "../common/FadingImage";
 import ScrollingContainer from "../ScrollingContainer";
-import { AnimatedTextLine } from "../AnimatedTextLine";
+import { AnimatedTextLine } from "../common/AnimatedTextLine";
 import { CircleNotch, Pause, Play, SkipBack, SkipForward, SpotifyLogo, YoutubeLogo } from "@phosphor-icons/react";
-import { HiddenVolumeSlider } from "../HiddenVolumeSlider";
+import { HiddenVolumeSlider } from "../common/HiddenVolumeSlider";
 import 'animate.css';
 
 

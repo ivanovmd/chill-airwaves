@@ -1,13 +1,8 @@
 import React, { useEffect } from "react";
-import { BackgroundImageOverlay } from "./BackgroundImageOverlay";
-import { MusicPlayer } from "./MusicPlayer";
 import { MusicProvider } from "../context/MusicContext";
-import { GoogleLogin, GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
-import { Login } from "./Login";
-import { Settings } from "./Settings";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Provider } from "react-redux";
 import { store } from "../store";
-import { AtcRadio } from "./radio/AtcRadio";
 import { TestLayout } from "./TestLayout";
 
 export const Main: React.FC = () => {

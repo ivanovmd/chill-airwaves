@@ -5,8 +5,8 @@ import { AtcAnimation } from "./AtcAnimation";
 import { AirplaneTakeoff, CircleNotch } from "@phosphor-icons/react";
 import { Airport, airports } from "../../../settings/liveatc";
 import ATCGridSquare from "./ATCGridSquare";
-import LiveUTCClock from "../LiveUTCClock";
-import { VolumeSlider } from "../VolumeSlider";
+import LiveUTCClock from "../common/LiveUTCClock";
+import { VolumeSlider } from "../common/VolumeSlider";
 import ATCGridBackground from "./ATCGridBackground";
 import VinylRecord from "../musicPlayer/VinylRecord";
 

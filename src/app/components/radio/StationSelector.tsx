@@ -1,7 +1,7 @@
 import { AirplaneTakeoff, CaretDown } from "@phosphor-icons/react";
 import React from "react";
 import ScrollingContainer from "../ScrollingContainer";
-import { AnimatedTextLine } from "../AnimatedTextLine";
+import { AnimatedTextLine } from "../common/AnimatedTextLine";
 
 
 interface AnimatedTextLineProps {
