@@ -8,11 +8,15 @@ interface AnimatedTextLineProps {
   className?: string;
   airportName: string;
   onClick: () => void;
+  accentColors?: {
+    primary: string;
+    secondary: string;
+  };
 }
 
 
 
-export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, onClick }) => {
+export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, onClick, accentColors }) => {
   return (
     <button title={airportName} className="text-center space-x-2 mb-6 text-xl w-full" onClick={onClick}>
       <div className="flex space-x-2 items-center mx-auto justify-center">

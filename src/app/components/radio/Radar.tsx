@@ -13,9 +13,13 @@ interface RadarProps {
   onTrackEnd: () => void;
   onTrackError: () => void;
   onPaused: () => void;
+  accentColors?: {
+    primary: string;
+    secondary: string;
+  };
 }
 
-export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, onTrackError, onPaused }) => {
+export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, onTrackError, onPaused, accentColors }) => {
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const [volume, setVolume] = useState(20);
 
@@ -47,8 +51,6 @@ export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, on
         onEnded={onTrackEnd}
         onError={onTrackError}
         onPause={onPaused}
-        //onEnded={() => dispatch(nextTrack())}
-        //onError={() => dispatch(nextTrack())}
         hidden
       >
       </audio>
