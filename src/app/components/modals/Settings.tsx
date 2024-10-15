@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { airports } from "../../settings/liveatc";
+import { airports } from "../../../settings/liveatc";
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectedAirport, setSelectedAirportIata } from "../store/atc/atsSlice";
+import { getSelectedAirport, setSelectedAirportIata } from "../../store/atc/atsSlice";
 
 export const Settings = () => {
   const dispatch = useDispatch();
   const selectedAirport = useSelector(getSelectedAirport)
 
   return (
-    <div>
+    <div className="absolute h-full w-full top-0 left-0 bg-black/50">
       <h1>Settings</h1>
       <p>Adjust your preferences here.</p>
 

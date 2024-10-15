@@ -52,21 +52,14 @@ export const Player = () => {
     ), { duration: Infinity });
 
 
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 2 }}
     >
       <div className="h-screen w-full text-white bg-cover bg-center flex flex-col" style={{ backgroundImage: "url('https://cdn.midjourney.com/44ba2194-1804-48c2-bf2f-6ee652c1fab8/0_0.png')" }}>
-        <div className="absolute top-1 left-1 flex z-10">
-          <button onClick={() => navigate('/')}>Home</button>
-          <button onClick={() => navigate('/loading')}>Loading</button>
-          <button onClick={() => navigate('/auth')}>Auth</button>
-        </div>
-
         <button className="absolute top-4 right-4 z-10" onClick={() => createToast()}>
           <Gear size={28} />
         </button>

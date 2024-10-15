@@ -30,9 +30,9 @@ export const Main: React.FC = () => {
   }, []);
 
 
-  if (isInitialLoading) {
-    return <AppLoader />;
-  }
+  //if (isInitialLoading) {
+  //  return <AppLoader />;
+  //}
 
 
   return (
