@@ -1,4 +1,5 @@
 import { useGoogleLogin } from "@react-oauth/google";
+import { motion } from "framer-motion";
 import React from "react";
 
 
@@ -13,14 +14,20 @@ export const Login = () => {
   });
 
   return (
-    <div className="absolute bottom-0 right-0">
-      <button onClick={() => login()}>
-        Log In With Google
-      </button>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="absolute bottom-0 right-0">
+        <button onClick={() => login()}>
+          Log In With Google
+        </button>
 
 
 
-      <div>{authToken}</div>
-    </div>
+        <div>{authToken}</div>
+      </div>
+    </motion.div>
   );
 }
