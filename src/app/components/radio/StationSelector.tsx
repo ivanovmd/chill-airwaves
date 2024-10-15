@@ -65,8 +65,6 @@ export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, 
         </AnimatePresence>
       </div>
 
-
-
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -74,7 +72,7 @@ export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, 
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
-            className="absolute h-full w-full top-0 left-0 bg-black/50 z-10 backdrop-blur-sm"
+            className="absolute h-full w-full top-0 left-0 bg-black/50 z-20 backdrop-blur-sm"
             onClick={handleModalClose}
           >
           </motion.div>
