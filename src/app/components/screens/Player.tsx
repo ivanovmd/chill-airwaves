@@ -23,6 +23,7 @@ export const Player = () => {
   const [scrollContent, setScrollContent] = useState('Hong Kong International Airport');
   const [playVinylAnimation, setPlayVinylAnimation] = useState(false);
   const { showModal } = useModal();
+  const [atcSourceLoading, setAtcSourceLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -74,12 +75,14 @@ export const Player = () => {
 
         <div className="flex-grow items-center flex relative flex-col bg-gradient-to-t from-black to-transparent p-20 overflow-hidden backdrop-blur-sm">
           <div className="flex-grow flex flex-col justify-center" style={{ width: '400px', maxWidth: '500px' }}>
-            <StationSelector onClick={console.log} airportName={selectedAirport?.name || ''} />
+            <StationSelector isLoading={atcSourceLoading} onClick={console.log} airportName={selectedAirport?.name || ''} />
 
             <Radar
               onPaused={console.log}
               onTrackEnd={() => dispatch(nextAtcTrack())}
               onTrackError={() => dispatch(nextAtcTrack())}
+              onCanPlay={() => setAtcSourceLoading(false)}
+              onLoadStart={() => setAtcSourceLoading(true)}
               airport={selectedAirport}
               atcSource={currentAtcTrack}
             />

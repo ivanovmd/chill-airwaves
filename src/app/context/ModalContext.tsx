@@ -37,7 +37,7 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               onClick={() => hideModal()}
             ></motion.div>
 
-            <div className='p-10 w-full flex'>
+            <div className='p-10 flex justify-center'>
               <motion.div
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}

@@ -10,7 +10,7 @@ export const Settings = () => {
   const { hideModal } = useModal();
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-lg">
       <h1 className="text-xl">Settings</h1>
 
       <h3>Airpots:</h3>

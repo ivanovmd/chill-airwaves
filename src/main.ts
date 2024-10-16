@@ -5,8 +5,12 @@ import { config } from "dotenv";
 import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { atcProtocolHandler, fileResponse } from './protocols/atcProtocol';
 import fs from 'fs';
+import ffmpeg from 'fluent-ffmpeg';
+import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
+
 
 config({ path: '.env' });
+ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
 const getAssetPath = () => {
   if (app.isPackaged) {
@@ -45,8 +49,6 @@ const createWindow = () => {
     height: 600,
     minWidth: 500,
     minHeight: 600,
-    maxHeight: 1000,
-    maxWidth: 1000,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },

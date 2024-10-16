@@ -1,4 +1,4 @@
-import { AirplaneTakeoff, CaretDown } from "@phosphor-icons/react";
+import { AirplaneTakeoff, CaretDown, CircleNotch } from "@phosphor-icons/react";
 import React from "react";
 import ScrollingContainer from "../ScrollingContainer";
 import { AnimatedTextLine } from "../common/AnimatedTextLine";
@@ -11,6 +11,7 @@ interface AnimatedTextLineProps {
   className?: string;
   airportName: string;
   onClick: () => void;
+  isLoading?: boolean;
   accentColors?: {
     primary: string;
     secondary: string;
@@ -19,7 +20,7 @@ interface AnimatedTextLineProps {
 
 
 
-export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, onClick, accentColors }) => {
+export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, onClick, isLoading = false }) => {
   const [showModal, setShowModal] = React.useState(false);
 
 
@@ -37,15 +38,15 @@ export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, 
       <div className="relative">
         <button title={airportName} className="text-center space-x-2 mb-6 text-xl w-full relative z-30" onClick={handleModalOpen}>
           <div className="flex space-x-2 items-center mx-auto justify-center">
-            <AirplaneTakeoff size={28} className="flex-shrink-0" />
+            {isLoading ? <CircleNotch className="rotating" size={28} /> : <AirplaneTakeoff size={28} className="flex-shrink-0" />}
             <div className="truncate">
               <ScrollingContainer speed={0.05} pauseDuration={1000} initialDelay={1000}>
                 <AnimatedTextLine id="airport-name">
-                  {airportName}
+                  {isLoading ? 'Connecting...' : airportName}
                 </AnimatedTextLine>
               </ScrollingContainer>
             </div>
-            <CaretDown className="flex-shrink-0" size={18} />
+            {isLoading ? '' : <CaretDown className="flex-shrink-0" size={18} />}
           </div>
         </button>
 

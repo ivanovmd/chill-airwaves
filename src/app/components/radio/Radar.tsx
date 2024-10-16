@@ -13,13 +13,15 @@ interface RadarProps {
   onTrackEnd: () => void;
   onTrackError: () => void;
   onPaused: () => void;
+  onCanPlay?: () => void;
+  onLoadStart?: () => void;
   accentColors?: {
     primary: string;
     secondary: string;
   };
 }
 
-export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, onTrackError, onPaused, accentColors }) => {
+export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, onTrackError, onPaused, onCanPlay, onLoadStart, accentColors }) => {
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const [volume, setVolume] = useState(20);
 
@@ -47,10 +49,12 @@ export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, on
     <div id="radar-container" className="flex-grow relative" style={{ maxHeight: '300px' }}>
       <audio controls ref={audioElementRef} autoPlay
         src={decodeURI(atcSource)}
-        onCanPlay={console.log}
-        onEnded={onTrackEnd}
-        onError={onTrackError}
-        onPause={onPaused}
+        onLoadStart={onLoadStart}
+        //onLoad={onCanPlay}
+        onCanPlay={onCanPlay && onCanPlay}
+        onEnded={onTrackEnd && onTrackEnd}
+        onError={onTrackError && onTrackError}
+        onPause={onPaused && onPaused}
         hidden
       >
       </audio>
