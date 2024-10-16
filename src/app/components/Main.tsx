@@ -12,6 +12,7 @@ import { XCircle } from "@phosphor-icons/react";
 import { Player } from "./screens/Player";
 import { AppLoader } from "./screens/AppLoader";
 import { Login } from "./screens/Login";
+import { ModalProvider } from "../context/ModalContext";
 
 export const Main: React.FC = () => {
   const [downloadsPath, setDownloadsPath] = React.useState<string | null>(null);
@@ -40,29 +41,37 @@ export const Main: React.FC = () => {
       <MusicProvider>
         {googleClientId && <GoogleOAuthProvider clientId={googleClientId}>
           {/*<BackgroundImageOverlay backgroundImageUrl="image://alaska.png" />*/}
+          <ModalProvider>
+            <BrowserRouter>
+              <AnimatePresence mode="wait">
+                <Routes>
+                  <Route path="/" element={<Player />} />
+                  <Route path="/auth" element={<Login />} />
+                </Routes>
+              </AnimatePresence>
+            </BrowserRouter>
 
-          <BrowserRouter>
-            <AnimatePresence mode="wait">
-              <Routes>
-                <Route path="/" element={<Player />} />
-                <Route path="/auth" element={<Login />} />
-              </Routes>
-            </AnimatePresence>
-          </BrowserRouter>
+            <div className="powered-by absolute bottom-2 right-2 text-white text-sm">
+              <a href="https://www.liveatc.net/" className="flex space-x-2">
+                <span>Powered by:</span>
+                <img src="https://img.liveatc.net/LiveATC-400.gif" alt="" className="rounded-md h-5" />
+              </a>
+            </div>
 
-          <Toaster
-            position="bottom-right"
-            reverseOrder={false}
-            containerClassName="notification-container"
+            <Toaster
+              position="bottom-right"
+              reverseOrder={false}
+              containerClassName="notification-container"
 
-            toastOptions={{
-              className: 'notification',
-              style: {
-                padding: 0,
-                margin: 0,
-              }
-            }}
-          />
+              toastOptions={{
+                className: 'notification',
+                style: {
+                  padding: 0,
+                  margin: 0,
+                }
+              }}
+            />
+          </ModalProvider>
         </GoogleOAuthProvider>}
       </MusicProvider>
     </Provider>

@@ -44,7 +44,7 @@ export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, on
 
   return (
 
-    <div id="radar-container" className="flex-grow relative">
+    <div id="radar-container" className="flex-grow relative" style={{ maxHeight: '300px' }}>
       <audio controls ref={audioElementRef} autoPlay
         src={decodeURI(atcSource)}
         onCanPlay={console.log}
@@ -55,15 +55,15 @@ export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, on
       >
       </audio>
 
-      <div id="radar" className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl" style={{ color: "#ca3b6b" }}>
-        <ATCGridSquare color="#ca3b6b" />
+      <div id="radar" className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl" style={{ color: "#ddb112" }}>
+        <ATCGridSquare color="#ddb112" />
 
         {atcSource &&
-          <AtcAnimation color="#ca3b6b" className="absolute top-0 left-0" audioElement={audioElementRef?.current} />
+          <AtcAnimation color="#ddb112" className="absolute top-0 left-0" audioElement={audioElementRef?.current} />
         }
 
         <div className="absolute top-4 right-4">
-          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color="#ca3b6b" />
+          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color="#ddb112" />
         </div>
 
         <div className="absolute top-4 left-4 flex items-center space-x-1 uppercase">

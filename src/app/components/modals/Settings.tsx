@@ -2,17 +2,19 @@ import React, { useEffect } from "react";
 import { airports } from "../../../settings/liveatc";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedAirport, setSelectedAirportIata } from "../../store/atc/atsSlice";
+import { useModal } from "../../../app/hooks/useModal";
 
 export const Settings = () => {
   const dispatch = useDispatch();
   const selectedAirport = useSelector(getSelectedAirport)
+  const { hideModal } = useModal();
 
   return (
-    <div className="absolute h-full w-full top-0 left-0 bg-black/50">
-      <h1>Settings</h1>
-      <p>Adjust your preferences here.</p>
+    <div className="w-full">
+      <h1 className="text-xl">Settings</h1>
 
       <h3>Airpots:</h3>
+      <button onClick={hideModal}>Hide</button>
       <p>{selectedAirport}</p>
       {airports.map((airport) => (
         <div key={airport.iata} onClick={() => dispatch(setSelectedAirportIata(airport.iata))}>

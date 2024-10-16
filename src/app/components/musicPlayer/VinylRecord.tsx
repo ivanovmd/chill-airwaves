@@ -85,7 +85,7 @@ const VinylRecord: React.FC<VinylRecordProps> = ({
         </div>
 
         {/* Center content (replaces Album cover) */}
-        <div className="center-content bg-black">
+        <div className="center-content border-0">
           {children}
         </div>
 

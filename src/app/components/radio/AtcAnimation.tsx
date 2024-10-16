@@ -1,6 +1,8 @@
 import AudioMotionAnalyzer from "audiomotion-analyzer";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { AUDIO_MOTION_ANALYZER_SETTINGS } from "../../../settings/audioMotionAnalyzer";
+import { lightenColor } from "../../../helpers/lightenColor";
+import { makeTransparent } from "../../../helpers/transparentColor";
 
 
 export interface AtcAnimationProps {
@@ -29,8 +31,9 @@ export const AtcAnimation: FC<AtcAnimationProps> = ({ audioElement, className, c
       audioMotionAnalyzer.registerGradient('custom', {
         bgColor: 'transparent',
         colorStops: [
-          color || 'rgb(2 132 199)',
-          color || 'rgb(2 132 199)',
+          //makeTransparent(color, 0) || 'rgb(2 132 199)',
+          //makeTransparent(color, .2) || 'rgb(2 132 199)',
+          makeTransparent(color, 0) || 'rgb(2 132 199)',
           color || 'rgb(2 132 199)',
         ]
       })
