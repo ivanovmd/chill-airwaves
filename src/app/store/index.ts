@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { atcSlice } from './atc/atsSlice'
 import { userSlice } from './userSlice'
 import { listenerMiddleware } from './middlewares/listener'
+import { userPreferencesSlice } from './userPreferences/userPreferencesSlice'
 
 
 
@@ -11,6 +12,7 @@ export const store = configureStore({
   reducer: {
     [atcSlice.reducerPath]: atcSlice.reducer,
     [userSlice.reducerPath]: userSlice.reducer,
+    [userPreferencesSlice.reducerPath]: userPreferencesSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(listenerMiddleware.middleware),

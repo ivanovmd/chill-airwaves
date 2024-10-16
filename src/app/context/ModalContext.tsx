@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { XCircle } from '@phosphor-icons/react';
 
@@ -21,6 +21,20 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const hideModal = () => {
     setIsVisible(false);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isVisible) {
+        hideModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isVisible]);
 
   return (
     <ModalContext.Provider value={{ showModal, hideModal }}>

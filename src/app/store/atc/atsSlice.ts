@@ -7,12 +7,18 @@ import { airports } from "../../../settings/liveatc";
 
 export const startAppListening = listenerMiddleware.startListening
 
+export interface TrackHistoryRecord {
+  track: string;
+  progress: number;
+}
+
 export interface AirportsState {
   selectedAirportIata: string | null;
   atcPlaylist: {
     tracks: string[];
     currentTrackIndex: number;
   };
+  trackHistory: TrackHistoryRecord[];
 }
 
 export const atcSlice = createSlice({
