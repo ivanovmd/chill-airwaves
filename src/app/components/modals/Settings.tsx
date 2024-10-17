@@ -3,11 +3,13 @@ import { airports } from "../../../settings/liveatc";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedAirport, setSelectedAirportIata } from "../../store/atc/atsSlice";
 import { useModal } from "../../../app/hooks/useModal";
+import { Share } from "./Share";
+
 
 export const Settings = () => {
   const dispatch = useDispatch();
   const selectedAirport = useSelector(getSelectedAirport)
-  const { hideModal } = useModal();
+  const { hideModal, showModal } = useModal();
 
   return (
     <div className="w-full max-w-lg">
@@ -21,6 +23,8 @@ export const Settings = () => {
           <h4>{airport.name} ({airport.iata})</h4>
         </div>
       ))}
+
+      <button onClick={() => showModal(<Share />)}>Share</button>
     </div>
   );
 }
