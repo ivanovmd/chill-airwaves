@@ -6,10 +6,25 @@ import TwitterShare from "../common/TwitterShare";
 
 export const Share = () => {
   const { hideModal } = useModal();
+  const [shareUrl, setShareUrl] = React.useState("");
   const hashtag = "#chillairwaves";
   const url = "https://chillairwaves.com";
   const title = "Chill Airwaves";
   const body = "Listen to the best chill music on the internet";
+
+
+  const verifyShare = async () => {
+    const response = await window.electronAPI.verifyShare(shareUrl);
+    if (response) {
+      alert("Share is valid");
+    } else {
+      alert("Share is invalid");
+    }
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShareUrl(e.target.value);
+  }
 
 
   return (
@@ -25,7 +40,8 @@ export const Share = () => {
       </div>
 
       <div>
-        <input type="text" placeholder="Validate Shared Post" />
+        <input type="text" placeholder="Validate Shared Post" onChange={handleChange} />
+        <button onClick={verifyShare}>Verify</button>
       </div>
     </div>
   );

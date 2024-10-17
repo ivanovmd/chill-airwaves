@@ -3,6 +3,7 @@ declare global {
   interface Window {
     electronAPI: {
       getEnv: (key: string) => Promise<string>;
+      verifyShare: (url: string) => Promise<boolean>;
       shell: {
         openExternal: (url: string) => Promise<void>;
       };

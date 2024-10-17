@@ -7,6 +7,8 @@ import { atcProtocolHandler, fileResponse } from './protocols/atcProtocol';
 import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
+import { verifyShare } from './helpers/cerifyShare';
+
 
 
 config({ path: '.env' });
@@ -71,6 +73,8 @@ const createWindow = () => {
   ipcMain.handle('open-external', async (_, url) => {
     return shell.openExternal(url);
   });
+
+  ipcMain.handle('verify-share', verifyShare);
 
   const gotTheLock = app.requestSingleInstanceLock()
 

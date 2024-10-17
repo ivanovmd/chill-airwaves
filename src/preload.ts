@@ -11,7 +11,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     openExternal: (url: string) => {
       return ipcRenderer.invoke('open-external', url);
     }
-  }
+  },
+  verifyShare: (url: string) => ipcRenderer.invoke('verify-share', url)
 });
 
 
