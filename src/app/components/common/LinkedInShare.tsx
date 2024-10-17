@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinkedinLogo } from '@phosphor-icons/react';
+import { openExternalLink } from '../../../helpers/openExternalLink';
 
 interface LinkedInShareProps {
   url: string;
@@ -17,8 +18,9 @@ const LinkedInShare: React.FC<LinkedInShareProps> = ({ url, title, summary, sour
     linkedInUrl.searchParams.append('title', title);
     if (summary) linkedInUrl.searchParams.append('summary', summary);
     if (source) linkedInUrl.searchParams.append('source', source);
+    const stringUrl = linkedInUrl.toString();
 
-    window.open(linkedInUrl.toString(), '_blank', 'width=600,height=600');
+    openExternalLink(stringUrl);
   };
 
   return (

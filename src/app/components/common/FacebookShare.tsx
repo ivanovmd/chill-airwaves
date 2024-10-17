@@ -1,5 +1,6 @@
 import React from 'react';
 import { FacebookLogo } from '@phosphor-icons/react';
+import { openExternalLink } from '../../../helpers/openExternalLink';
 
 interface FacebookShareProps {
   url: string;
@@ -15,8 +16,9 @@ const FacebookShare: React.FC<FacebookShareProps> = ({ url, quote, hashtag }) =>
     facebookUrl.searchParams.append('u', url);
     if (quote) facebookUrl.searchParams.append('quote', quote);
     if (hashtag) facebookUrl.searchParams.append('hashtag', hashtag);
+    const stringUrl = facebookUrl.toString();
 
-    window.open(facebookUrl.toString(), '_blank', 'width=600,height=600');
+    openExternalLink(stringUrl);
   };
 
   return (

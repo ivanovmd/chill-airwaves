@@ -3,6 +3,9 @@ declare global {
   interface Window {
     electronAPI: {
       getEnv: (key: string) => Promise<string>;
+      shell: {
+        openExternal: (url: string) => Promise<void>;
+      };
     };
     YT: any;
     onYouTubeIframeAPIReady: () => void;

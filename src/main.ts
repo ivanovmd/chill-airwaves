@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, ipcMain, protocol } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, protocol, shell } from 'electron';
 import path from 'path';
 import os from 'os';
 import { config } from "dotenv";
@@ -68,6 +68,10 @@ const createWindow = () => {
     return path.join(app.getPath('downloads'));
   });
 
+  ipcMain.handle('open-external', async (_, url) => {
+    return shell.openExternal(url);
+  });
+
   const gotTheLock = app.requestSingleInstanceLock()
 
   if (!gotTheLock) {
@@ -94,6 +98,7 @@ const createWindow = () => {
 
     return process.env[key];
   });
+
 
   protocol.handle(process.env.ATC_PROTOCOL, atcProtocolHandler)
   protocol.handle('icon', async (request) => {

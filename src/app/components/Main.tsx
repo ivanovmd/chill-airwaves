@@ -13,6 +13,7 @@ import { Player } from "./screens/Player";
 import { AppLoader } from "./screens/AppLoader";
 import { Login } from "./screens/Login";
 import { ModalProvider } from "../context/ModalContext";
+import { openExternalLink } from "../../helpers/openExternalLink";
 
 export const Main: React.FC = () => {
   const [downloadsPath, setDownloadsPath] = React.useState<string | null>(null);
@@ -52,7 +53,7 @@ export const Main: React.FC = () => {
             </BrowserRouter>
 
             <div className="powered-by absolute bottom-2 right-2 text-white text-sm">
-              <a href="https://www.liveatc.net/" className="flex space-x-2">
+              <a href="https://www.liveatc.net/" onClick={(e) => openExternalLink("https://www.liveatc.net/", e)} className="flex space-x-2">
                 <span>Powered by:</span>
                 <img src="https://img.liveatc.net/LiveATC-400.gif" alt="" className="rounded-md h-5" />
               </a>

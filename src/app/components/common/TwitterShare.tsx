@@ -1,5 +1,6 @@
 import React from 'react';
 import { TwitterLogo } from '@phosphor-icons/react';
+import { openExternalLink } from '../../../helpers/openExternalLink';
 
 interface TwitterShareProps {
   url: string;
@@ -17,8 +18,9 @@ const TwitterShare: React.FC<TwitterShareProps> = ({ url, text, hashtags, via })
     if (text) twitterUrl.searchParams.append('text', text);
     if (hashtags && hashtags.length > 0) twitterUrl.searchParams.append('hashtags', hashtags.join(','));
     if (via) twitterUrl.searchParams.append('via', via);
+    const stringUrl = twitterUrl.toString();
 
-    window.open(twitterUrl.toString(), '_blank', 'width=600,height=300');
+    openExternalLink(stringUrl);
   };
 
   return (
