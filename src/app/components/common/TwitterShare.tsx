@@ -25,7 +25,7 @@ const TwitterShare: React.FC<TwitterShareProps> = ({ url, text, hashtags, via })
 
   return (
     <button onClick={handleShare} className="inline-flex items-center">
-      <TwitterLogo size={36} weight="fill" color='#1DA1F2' />
+      <TwitterLogo size={64} weight="fill" color='#1DA1F2' />
     </button>
   );
 };

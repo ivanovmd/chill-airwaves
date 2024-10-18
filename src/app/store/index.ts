@@ -12,7 +12,7 @@ const persistConfig = {
   storage,
   // Optionally, you can blacklist or whitelist specific reducers
   // blacklist: ['someReducer'],
-  // whitelist: ['someReducer'],
+  // whitelist: ['someReducer'], 
 }
 
 const rootReducer = combineReducers({

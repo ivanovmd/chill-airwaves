@@ -25,7 +25,7 @@ const LinkedInShare: React.FC<LinkedInShareProps> = ({ url, title, summary, sour
 
   return (
     <button onClick={handleShare} className="inline-flex items-center">
-      <LinkedinLogo size={36} weight="fill" color='#0077B5' />
+      <LinkedinLogo size={64} weight="fill" color='#0077B5' />
     </button>
   );
 };

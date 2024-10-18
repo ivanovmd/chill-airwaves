@@ -23,7 +23,7 @@ const FacebookShare: React.FC<FacebookShareProps> = ({ url, quote, hashtag }) =>
 
   return (
     <button onClick={handleShare} className="inline-flex items-center">
-      <FacebookLogo size={36} weight="fill" color='#1877F2' />
+      <FacebookLogo size={64} weight="fill" color='#1877F2' />
     </button>
   );
 };

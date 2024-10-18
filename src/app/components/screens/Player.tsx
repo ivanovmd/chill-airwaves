@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useModal } from "../../../app/hooks/useModal";
 import { Settings } from "../modals/Settings";
+import { BackgroundImageOverlay } from "../BackgroundImageOverlay";
 
 
 export const Player = () => {
@@ -64,7 +65,9 @@ export const Player = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 2 }}
     >
-      <div className="h-screen w-full text-white bg-cover bg-center flex flex-col" style={{ backgroundImage: "url('https://cdn.midjourney.com/aeb9cae2-47e3-4edf-97b1-5170e511429f/0_0.png" }}>
+      <div className="h-screen w-full text-white flex flex-col">
+        <BackgroundImageOverlay backgroundImageUrl={"https://cdn.midjourney.com/aeb9cae2-47e3-4edf-97b1-5170e511429f/0_0.png"} />
+
         <button className="absolute top-4 right-4 z-10" onClick={() => openSettingsModal()}>
           <Gear size={28} />
         </button>

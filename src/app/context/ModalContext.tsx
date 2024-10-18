@@ -57,7 +57,7 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="p-4 rounded-lg relative bg-white w-full flex z-30"
+                className="p-10 rounded-lg relative bg-white w-full flex z-30"
               >
                 <button className='absolute top-2 right-2' onClick={hideModal}><XCircle size={20} /></button>
                 {modalContent}

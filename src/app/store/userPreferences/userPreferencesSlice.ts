@@ -4,7 +4,7 @@ import { RootState } from "..";
 
 export interface UserPreferencesState {
   selectedTheme: string,
-  likedAirports: string[],
+  likedAirportsIata: string[],
   musicVolume: number,
   atcVolume: number,
 }
@@ -14,7 +14,7 @@ export const userPreferencesSlice = createSlice({
   name: 'userPreferences',
   initialState: {
     selectedTheme: '',
-    likedAirports: [],
+    likedAirportsIata: [],
     musicVolume: 50,
     atcVolume: 25,
   } as UserPreferencesState,
@@ -23,7 +23,7 @@ export const userPreferencesSlice = createSlice({
       state.selectedTheme = action.payload;
     },
     setLikedAirports(state, action) {
-      state.likedAirports = action.payload;
+      state.likedAirportsIata = action.payload;
     },
     setMusicVolume(state, action) {
       state.musicVolume = action.payload;
@@ -32,7 +32,7 @@ export const userPreferencesSlice = createSlice({
       state.atcVolume = action.payload;
     },
     addLikedAirport(state, action) {
-      state.likedAirports.push(action.payload);
+      state.likedAirportsIata.push(action.payload);
     }
   },
   selectors: {
