@@ -43,10 +43,6 @@ export const Player = () => {
     }
   }, [selectedAirportIata])
 
-  useEffect(() => {
-    dispatch(setSelectedAirportIata('hkg'))
-  }, []);
-
   const createToast = () => toast(
     (t: Toast) => (
       <div className="flex items-center text-sm" onClick={() => toast.dismiss(t.id)}>
