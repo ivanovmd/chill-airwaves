@@ -6,9 +6,10 @@ interface FacebookShareProps {
   url: string;
   quote?: string;
   hashtag?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const FacebookShare: React.FC<FacebookShareProps> = ({ url, quote, hashtag }) => {
+const FacebookShare: React.FC<FacebookShareProps> = ({ url, quote, hashtag, onClick }) => {
   const handleShare = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -19,6 +20,7 @@ const FacebookShare: React.FC<FacebookShareProps> = ({ url, quote, hashtag }) =>
     const stringUrl = facebookUrl.toString();
 
     openExternalLink(stringUrl);
+    if (onClick) onClick(event);
   };
 
   return (

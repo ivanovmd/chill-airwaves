@@ -7,9 +7,10 @@ interface LinkedInShareProps {
   title: string;
   summary?: string;
   source?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const LinkedInShare: React.FC<LinkedInShareProps> = ({ url, title, summary, source }) => {
+const LinkedInShare: React.FC<LinkedInShareProps> = ({ url, title, summary, source, onClick }) => {
   const handleShare = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -21,6 +22,7 @@ const LinkedInShare: React.FC<LinkedInShareProps> = ({ url, title, summary, sour
     const stringUrl = linkedInUrl.toString();
 
     openExternalLink(stringUrl);
+    if (onClick) onClick(event);
   };
 
   return (

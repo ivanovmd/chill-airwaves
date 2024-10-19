@@ -6,6 +6,7 @@ import { atcSlice } from './atc/atsSlice'
 import { userSlice } from './userSlice'
 import { listenerMiddleware } from './middlewares/listener'
 import { userPreferencesSlice } from './userPreferences/userPreferencesSlice'
+import { appSlice } from './appState/appSlice'
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   [atcSlice.reducerPath]: atcSlice.reducer,
   [userSlice.reducerPath]: userSlice.reducer,
   [userPreferencesSlice.reducerPath]: userPreferencesSlice.reducer,
+  [appSlice.reducerPath]: appSlice.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

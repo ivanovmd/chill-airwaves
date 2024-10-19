@@ -6,6 +6,9 @@ import { AnimatedTextLine } from "../common/AnimatedTextLine";
 import { CircleNotch, Pause, Play, SkipBack, SkipForward, SpotifyLogo, YoutubeLogo } from "@phosphor-icons/react";
 import { HiddenVolumeSlider } from "../common/HiddenVolumeSlider";
 import 'animate.css';
+import { useDispatch, useSelector } from "react-redux";
+import { getMusicVolume, setMusicVolume } from "../../../app/store/userPreferences/userPreferencesSlice";
+import { openExternalLink } from "../../../helpers/openExternalLink";
 
 
 interface MusicPlayerProps {
@@ -24,13 +27,18 @@ interface MusicPlayerProps {
 }
 
 export const MusicPlayer: React.FC<MusicPlayerProps> = ({ onPause, onPlay, onNextTrack, onPreviousTrack, onVolumeChange, imageUrl, trackName, authorName, spotifyLink, youtubeLink, isBuffering, isPlaying }) => {
-  const [volume, setVolume] = useState(50);
   const [play, setPlay] = useState(false);
   const [showSocials, setShowSocials] = useState(false);
+  const volume = useSelector(getMusicVolume);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onVolumeChange(volume);
+  }, [volume])
 
   const handleVolumeChange = (value: number) => {
-    setVolume(value);
-    onVolumeChange(value);
+    dispatch(setMusicVolume(value));
+    //onVolumeChange(value);
   }
 
   const handlePlayResume = () => {
@@ -79,11 +87,15 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ onPause, onPlay, onNex
           </div>
 
           <div className="flex-shrink-0">
-            <a hidden={!showSocials} className="animate__animated animate__faster animate__fadeIn" href={youtubeLink} target="_blank"><YoutubeLogo size={20} color="#FF0000" weight="fill" /></a>
+            <a hidden={!showSocials} className="animate__animated animate__faster animate__fadeIn"
+              onClick={(e) => openExternalLink(youtubeLink, e)}
+              href={youtubeLink} target="_blank"><YoutubeLogo size={20} color="#FF0000" weight="fill" /></a>
           </div>
 
           <div className="flex-shrink-0">
-            <a hidden={!showSocials} className="animate__animated animate__faster animate__fadeIn animate__delay-015s" href={spotifyLink} target="_blank"><SpotifyLogo size={20} color="#1DB954" weight="fill" /></a>
+            <a hidden={!showSocials} className="animate__animated animate__faster animate__fadeIn animate__delay-015s"
+              onClick={(e) => openExternalLink(spotifyLink, e)}
+              href={spotifyLink} target="_blank"><SpotifyLogo size={20} color="#1DB954" weight="fill" /></a>
           </div>
         </div>
 

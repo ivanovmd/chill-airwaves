@@ -7,9 +7,10 @@ interface TwitterShareProps {
   text?: string;
   hashtags?: string[];
   via?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const TwitterShare: React.FC<TwitterShareProps> = ({ url, text, hashtags, via }) => {
+const TwitterShare: React.FC<TwitterShareProps> = ({ url, text, hashtags, via, onClick }) => {
   const handleShare = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -21,6 +22,7 @@ const TwitterShare: React.FC<TwitterShareProps> = ({ url, text, hashtags, via })
     const stringUrl = twitterUrl.toString();
 
     openExternalLink(stringUrl);
+    if (onClick) onClick(event);
   };
 
   return (

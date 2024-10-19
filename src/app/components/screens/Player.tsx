@@ -13,6 +13,9 @@ import { motion } from "framer-motion";
 import { useModal } from "../../../app/hooks/useModal";
 import { Settings } from "../modals/Settings";
 import { BackgroundImageOverlay } from "../BackgroundImageOverlay";
+import { Share } from "../modals/Share";
+import { openExternalLink } from "../../../helpers/openExternalLink";
+import { getIsUnlocked } from "../../../app/store/appState/appSlice";
 
 
 export const Player = () => {
@@ -21,10 +24,9 @@ export const Player = () => {
   const dispatch = useDispatch();
   const selectedAirportIata = useSelector(getSelectedAirport);
   const [selectedAirport, setSelectedAirport] = useState<Airport>();
-  const [scrollContent, setScrollContent] = useState('Hong Kong International Airport');
-  const [playVinylAnimation, setPlayVinylAnimation] = useState(false);
   const { showModal } = useModal();
   const [atcSourceLoading, setAtcSourceLoading] = useState(false);
+  const isAppUnlocked = useSelector(getIsUnlocked);
 
   const navigate = useNavigate();
 
@@ -95,13 +97,26 @@ export const Player = () => {
               imageUrl={videoInfo?.thumbnail_url}
               trackName={videoInfo?.title || ''}
               authorName={getAutorName(videoInfo?.author_name) || ''}
-              spotifyLink={'google.com'}
-              youtubeLink={'gogole.com'}
+              spotifyLink={'http://google.com'}
+              youtubeLink={'http://gogole.com'}
               isPlaying={isPlayng}
               isBuffering={isBuffering}
             />
           </div>
 
+        </div>
+
+        {!isAppUnlocked &&
+          <div className="share-to-unlock absolute bottom-2 left-2 text-sm">
+            <button onClick={() => showModal(<Share />)}>Share to unlock more features</button>
+          </div>
+        }
+
+        <div className="powered-by absolute bottom-2 right-2 text-sm">
+          <a href="https://www.liveatc.net/" onClick={(e) => openExternalLink("https://www.liveatc.net/", e)} className="flex space-x-2">
+            <span>Powered by:</span>
+            <img src="https://img.liveatc.net/LiveATC-400.gif" alt="" className="rounded-md h-5" />
+          </a>
         </div>
       </div>
     </motion.div>

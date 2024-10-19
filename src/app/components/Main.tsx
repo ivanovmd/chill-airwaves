@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { MusicProvider } from "../context/MusicContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Provider } from "react-redux";
@@ -10,13 +10,12 @@ import { Player } from "./screens/Player";
 import { AppLoader } from "./screens/AppLoader";
 import { Login } from "./screens/Login";
 import { ModalProvider } from "../context/ModalContext";
-import { openExternalLink } from "../../helpers/openExternalLink";
 import { PersistGate } from "redux-persist/integration/react";
 
-export const Main: React.FC = () => {
-  const [downloadsPath, setDownloadsPath] = React.useState<string | null>(null);
-  const [googleClientId, setGoogleClientId] = React.useState<string | null>(null);
-  const [isInitialLoading, setIsInitialLoading] = React.useState<boolean>(true);
+export const Main: FC = () => {
+  const [downloadsPath, setDownloadsPath] = useState<string | null>(null);
+  const [googleClientId, setGoogleClientId] = useState<string | null>(null);
+  const [isInitialLoading, setIsInitialLoading] = useState<boolean>(true);
 
   useEffect(() => {
     window.electronAPI.getEnv('GOOGLE_CLIENT_ID').then((googleClientId: string) => {
@@ -45,13 +44,6 @@ export const Main: React.FC = () => {
                   </Routes>
                 </AnimatePresence>
               </BrowserRouter>
-
-              <div className="powered-by absolute bottom-2 right-2 text-white text-sm">
-                <a href="https://www.liveatc.net/" onClick={(e) => openExternalLink("https://www.liveatc.net/", e)} className="flex space-x-2">
-                  <span>Powered by:</span>
-                  <img src="https://img.liveatc.net/LiveATC-400.gif" alt="" className="rounded-md h-5" />
-                </a>
-              </div>
 
               <Toaster
                 position="bottom-right"

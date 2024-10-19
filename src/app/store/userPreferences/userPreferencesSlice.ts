@@ -1,5 +1,6 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "..";
+import { get } from "http";
 
 
 export interface UserPreferencesState {
@@ -37,9 +38,12 @@ export const userPreferencesSlice = createSlice({
   },
   selectors: {
     getSelectedTheme: (state: UserPreferencesState) => state.selectedTheme,
+    getLikedAirports: (state: UserPreferencesState) => state.likedAirportsIata,
+    getMusicVolume: (state: UserPreferencesState) => state.musicVolume,
+    getAtcVolume: (state: UserPreferencesState) => state.atcVolume,
   }
 })
 
 
-export const { getSelectedTheme } = userPreferencesSlice.selectors;
+export const { getSelectedTheme, getAtcVolume, getLikedAirports, getMusicVolume } = userPreferencesSlice.selectors;
 export const { setSelectedTheme, setLikedAirports, setMusicVolume, setAtcVolume, addLikedAirport } = userPreferencesSlice.actions;

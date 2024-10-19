@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectedAirport, nextTrack, getCurrentAtcTrack } from "../../store/atc/atsSlice";
 import ATCGridSquare from "./ATCGridSquare";
 import { AtcAnimation } from "./AtcAnimation";
 import { HiddenVolumeSlider } from "../common/HiddenVolumeSlider";
 import LiveUTCClock from "../common/LiveUTCClock";
-import { Airport, airports } from "../../../settings/liveatc";
+import { Airport } from "../../../settings/liveatc";
+import { getAtcVolume, setAtcVolume } from "../../../app/store/userPreferences/userPreferencesSlice";
 
 interface RadarProps {
   airport: Airport;
@@ -23,13 +23,17 @@ interface RadarProps {
 
 export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, onTrackError, onPaused, onCanPlay, onLoadStart, accentColors }) => {
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
-  const [volume, setVolume] = useState(20);
+  const volume = useSelector(getAtcVolume);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (audioElementRef.current) {
+      audioElementRef.current.volume = volume / 100;
+    }
+  }, [volume])
 
   const handleVolumeChange = (value: number) => {
-    if (audioElementRef.current) {
-      setVolume(value);
-      audioElementRef.current.volume = value / 100;
-    }
+    dispatch(setAtcVolume(value));
   }
 
   useEffect(() => {

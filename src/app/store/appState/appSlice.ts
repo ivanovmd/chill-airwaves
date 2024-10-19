@@ -22,10 +22,10 @@ export const appSlice = createSlice({
     }
   },
   selectors: {
-    userEmail: (state: AppState) => state.userEmail,
-    isUnlocked: (state: AppState) => state.isUnlocked,
+    getUserEmail: (state: AppState) => state.userEmail,
+    getIsUnlocked: (state: AppState) => state.isUnlocked,
   }
 })
 
 export const { setUserEmail, setIsUnlocked } = appSlice.actions;
-export const { userEmail, isUnlocked } = appSlice.selectors;
+export const { getUserEmail, getIsUnlocked } = appSlice.selectors;
