@@ -35,8 +35,14 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
   const handleWidth = 16; // w-4 is 16px
   const trackHeight = 8; // h-2 is 8px
 
-  const calculatePercentage = (val: number) => ((val - min) / (max - min)) * 100;
-  const percentage = calculatePercentage(value);
+  const calculateThumbPosition = (val: number): number => {
+    const range = max - min;
+    const valueOffset = val - min;
+    const trackWidth = rangeRef.current ? rangeRef.current.clientWidth - handleWidth : 0;
+    return (valueOffset / range) * trackWidth;
+  };
+
+  const thumbPosition = calculateThumbPosition(value);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -51,15 +57,12 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
   const updateValue = (clientX: number) => {
     if (rangeRef.current) {
       const rect = rangeRef.current.getBoundingClientRect();
-      const thumbOffset = handleWidth / 2;
-      const availableWidth = rect.width - handleWidth;
+      const trackWidth = rect.width - handleWidth;
+      let x = clientX - rect.left - handleWidth / 2;
+      x = Math.max(0, Math.min(x, trackWidth));
 
-      let x = clientX - rect.left - thumbOffset;
-      x = Math.max(0, Math.min(x, availableWidth));
-
-      const newPercentage = x / availableWidth;
-      const newValue = min + newPercentage * (max - min);
-      onChange(Math.round(newValue / step) * step);
+      const newValue = min + (x / trackWidth) * (max - min);
+      onChange(Math.max(min, Math.min(max, Math.round(newValue / step) * step)));
     }
   };
 
@@ -122,13 +125,16 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
       />
       <div
         ref={rangeRef}
-        className={`w-full h-2 rounded-full cursor-pointer`}
+        className={`w-full overflow-hidden h-2 rounded-full cursor-pointer`}
         style={{ backgroundColor: trackColor }}
         onMouseDown={handleMouseDown}
       >
         <div
-          className={`h-full rounded-full ${transitionDuration}`}
-          style={{ width: `${percentage}%`, backgroundColor: filledTrackColor }}
+          className={`h-full ${transitionDuration}`}
+          style={{
+            width: `calc(${(thumbPosition / (rangeRef.current?.clientWidth ?? 1)) * 100}% + ${handleWidth / 2}px)`,
+            backgroundColor: filledTrackColor
+          }}
         />
       </div>
       <div
@@ -141,9 +147,9 @@ const CustomRangeInput: React.FC<CustomRangeInputProps> = ({
         className={`absolute w-4 h-4 rounded-full shadow cursor-grab ${isDragging ? 'cursor-grabbing' : ''
           } ${isFocused ? 'ring-2 ring-offset-2 ring-blue-300' : ''} ${transitionDuration}`}
         style={{
-          left: `calc(${percentage}% + ${(handleWidth - trackHeight) / 2}px)`,
-          transform: 'translate(-50%, -50%)',
+          left: `${thumbPosition}px`,
           top: '50%',
+          transform: 'translateY(-50%)',
           backgroundColor: thumbColor,
         }}
         onMouseDown={handleMouseDown}
