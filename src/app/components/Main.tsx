@@ -29,18 +29,9 @@ export const Main: FC = () => {
   }, []);
 
 
-  //if (isInitialLoading) {
-  //  return <AnimatePresence>
-  //    <motion.div
-  //      initial={{ opacity: 0 }}
-  //      animate={{ opacity: 1 }}
-  //      exit={{ opacity: 0 }}
-  //      transition={{ duration: 2 }}
-  //    >
-  //      <Splashscreen fadeOut={!isInitialLoading} />
-  //    </motion.div>
-  //  </AnimatePresence >;
-  //}
+  if (isInitialLoading) {
+    return <Splashscreen />
+  }
 
 
   return (
@@ -52,10 +43,10 @@ export const Main: FC = () => {
             <ModalProvider>
               <BrowserRouter>
                 <AnimatePresence mode="wait">
-                  {isInitialLoading ? <Splashscreen fadeOut={false} /> : <Routes>
+                  <Routes>
                     <Route path="/" element={<Player />} />
                     <Route path="/auth" element={<Login />} />
-                  </Routes>}
+                  </Routes>
                 </AnimatePresence>
               </BrowserRouter>
 

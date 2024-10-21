@@ -63,15 +63,15 @@ export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, on
       >
       </audio>
 
-      <div id="radar" className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl" style={{ color: "#ddb112" }}>
-        <ATCGridSquare color="#ddb112" />
+      <div id="radar" className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl" style={{ color: "#12bedd" }}>
+        <ATCGridSquare color="#12bedd" />
 
         {atcSource &&
-          <AtcAnimation color="#ddb112" className="absolute top-0 left-0" audioElement={audioElementRef?.current} />
+          <AtcAnimation color="#12bedd" className="absolute top-0 left-0" audioElement={audioElementRef?.current} />
         }
 
         <div className="absolute top-4 right-4">
-          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color="#ddb112" />
+          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color="#12bedd" />
         </div>
 
         <div className="absolute top-4 left-4 flex items-center space-x-1 uppercase">
