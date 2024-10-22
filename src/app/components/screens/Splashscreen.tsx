@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import '../../styles/splashscreen.scss';
+import { useSelector } from 'react-redux';
+import { defaultTheme, getSelectedTheme } from '../../../app/store/userPreferences/userPreferencesSlice';
 
 interface SplashscreenProps {
   fadeOut?: boolean;
@@ -8,6 +10,7 @@ interface SplashscreenProps {
 
 export function Splashscreen({ fadeOut }: SplashscreenProps) {
   const splashscreenRef = useRef<HTMLDivElement>(null);
+  //const appTheme = useSelector(getSelectedTheme) || defaultTheme;
 
   const getPathColor = (index: number) => {
     return index < 5 ? '#12bedd' : '#ffffff';

@@ -16,6 +16,7 @@ import { BackgroundImageOverlay } from "../BackgroundImageOverlay";
 import { Share } from "../modals/Share";
 import { openExternalLink } from "../../../helpers/openExternalLink";
 import { getIsUnlocked } from "../../../app/store/appState/appSlice";
+import { defaultTheme, setSelectedTheme } from "../../../app/store/userPreferences/userPreferencesSlice";
 
 
 export const Player = () => {

@@ -104,7 +104,7 @@ const createYoutubePlayer = (playlistId: string, onPlayerReady: CallableFunction
 export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
   const [youtubePlayer, setYoutubePlayer] = React.useState<any>(null);
   const [videoInfo, setVideoInfo] = React.useState<VideoInfo | null>(null);
-  const [volume, setVolume] = React.useState<number>(25);
+  const [volume, setVolume] = React.useState<number>(5);
   const [isPlayng, setIsPlaying] = React.useState<boolean>(false);
   const [playlistId, setPlaylistId] = React.useState<string | null>(null);
   const [isBuffering, setIsBuffering] = React.useState<boolean>(false);
@@ -222,7 +222,7 @@ export const MusicProvider: React.FC<MusicProviderProps> = ({ children }) => {
       youtubePlayer.nextVideo()
       youtubePlayer.addEventListener('onStateChange', onPlayerStateChange)
       youtubePlayer.addEventListener('onError', onError)
-      youtubePlayer.setVolume(25)
+      youtubePlayer.setVolume(volume)
     }
   }, [youtubePlayer]);
 

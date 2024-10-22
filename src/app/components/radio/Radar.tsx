@@ -5,7 +5,7 @@ import { AtcAnimation } from "./AtcAnimation";
 import { HiddenVolumeSlider } from "../common/HiddenVolumeSlider";
 import LiveUTCClock from "../common/LiveUTCClock";
 import { Airport } from "../../../settings/liveatc";
-import { getAtcVolume, setAtcVolume } from "../../../app/store/userPreferences/userPreferencesSlice";
+import { defaultTheme, getAtcVolume, getSelectedTheme, setAtcVolume } from "../../../app/store/userPreferences/userPreferencesSlice";
 
 interface RadarProps {
   airport: Airport;
@@ -15,16 +15,13 @@ interface RadarProps {
   onPaused: () => void;
   onCanPlay?: () => void;
   onLoadStart?: () => void;
-  accentColors?: {
-    primary: string;
-    secondary: string;
-  };
 }
 
-export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, onTrackError, onPaused, onCanPlay, onLoadStart, accentColors }) => {
+export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, onTrackError, onPaused, onCanPlay, onLoadStart }) => {
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const volume = useSelector(getAtcVolume);
   const dispatch = useDispatch();
+  const appTheme = useSelector(getSelectedTheme) || defaultTheme
 
   useEffect(() => {
     if (audioElementRef.current) {
@@ -42,12 +39,6 @@ export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, on
     }
   }, [volume])
 
-  useEffect(() => {
-    if (audioElementRef.current) {
-      handleVolumeChange(volume)
-    }
-  }, [audioElementRef])
-
   return (
 
     <div id="radar-container" className="flex-grow relative" style={{ maxHeight: '300px' }}>
@@ -63,15 +54,15 @@ export const Radar: React.FC<RadarProps> = ({ airport, atcSource, onTrackEnd, on
       >
       </audio>
 
-      <div id="radar" className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl" style={{ color: "#12bedd" }}>
-        <ATCGridSquare color="#12bedd" />
+      <div id="radar" className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-3xl" style={{ color: appTheme.colors.primary }}>
+        <ATCGridSquare color={appTheme.colors.primary} />
 
         {atcSource &&
-          <AtcAnimation color="#12bedd" className="absolute top-0 left-0" audioElement={audioElementRef?.current} />
+          <AtcAnimation color={appTheme.colors.primary} className="absolute top-0 left-0" audioElement={audioElementRef?.current} />
         }
 
         <div className="absolute top-4 right-4">
-          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color="#12bedd" />
+          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color={appTheme.colors.primary} />
         </div>
 
         <div className="absolute top-4 left-4 flex items-center space-x-1 uppercase">

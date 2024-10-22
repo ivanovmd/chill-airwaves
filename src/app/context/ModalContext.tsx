@@ -41,7 +41,7 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       {children}
       <AnimatePresence>
         {isVisible && (
-          <div className='fixed inset-0 z-20 flex items-center justify-center'>
+          <div className='fixed inset-0 z-20  max-h-full'>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -51,13 +51,13 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               onClick={() => hideModal()}
             ></motion.div>
 
-            <div className='p-10 flex justify-center'>
+            <div className='p-10 flex justify-center max-h-full'>
               <motion.div
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="p-10 rounded-lg relative bg-white w-full flex z-30"
+                className="p-10 rounded-lg relative bg-white w-full flex z-30 max-h-full"
               >
                 <button className='absolute top-2 right-2' onClick={hideModal}><XCircle size={20} /></button>
                 {modalContent}

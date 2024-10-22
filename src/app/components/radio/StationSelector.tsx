@@ -55,7 +55,7 @@ export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, 
 
   return (
     <div>
-      <div className="relative">
+      <div className="relative hover:text-primary">
         <button title={airportName} className="text-center space-x-2 mb-6 text-xl w-full relative z-30" onClick={handleModalOpen}>
           <div className="flex space-x-2 items-center mx-auto justify-center">
 

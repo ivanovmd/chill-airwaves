@@ -12,19 +12,29 @@ export const Settings = () => {
   const { hideModal, showModal } = useModal();
 
   return (
-    <div className="w-full max-w-lg">
+    <div className="max-w-screen-md w-full space-y-6 flex flex-col">
       <h1 className="text-xl">Settings</h1>
 
-      <h3>Airpots:</h3>
-      <button onClick={hideModal}>Hide</button>
-      <p>{selectedAirport}</p>
-      {airports.map((airport) => (
-        <div key={airport.iata} onClick={() => dispatch(setSelectedAirportIata(airport.iata))}>
-          <h4>{airport.name} ({airport.iata})</h4>
-        </div>
-      ))}
+      <div className="flex flex-col w-full overflow-auto">
+        <h2>Themes:</h2>
 
-      <button onClick={() => showModal(<Share />)}>Share</button>
+        <div className="grid grid-cols-4 gap-4 w-full max-h-full overflow-auto">
+          {Array.from({ length: 39 }).map((_, index) => (
+            <div key={index}>
+              <div className="w-24 h-16 overflow-hidden rounded-md">
+                <img src="https://cdn.midjourney.com/aeb9cae2-47e3-4edf-97b1-5170e511429f/0_0.png" alt="" className="w-full h-full object-cover object-center " />
+              </div>
+              <div className="flex space-x-1 mt-1">
+                <div className="rounded-md h-5 w-full bg-red-700"></div>
+                <div className="rounded-md h-5 w-full bg-slate-700"></div>
+                <div className="rounded-md h-5 w-full bg-blue-700"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/*<button onClick={() => showModal(<Share />)}>Share</button>*/}
     </div>
   );
 }

@@ -11,7 +11,7 @@ interface VolumeSliderProps {
   color?: string;
 }
 
-export const HiddenVolumeSlider: React.FC<VolumeSliderProps> = ({ volume, setVolume, className, color = 'white' }) => {
+export const HiddenVolumeSlider: React.FC<VolumeSliderProps> = ({ volume, setVolume, className, color }) => {
   const [unmuteVolume, setUnmuteVolume] = useState(25);
   const [isHidden, setIsHidden] = useState(true);
 

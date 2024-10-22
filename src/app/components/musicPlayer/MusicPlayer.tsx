@@ -7,7 +7,7 @@ import { CircleNotch, Pause, Play, SkipBack, SkipForward, SpotifyLogo, YoutubeLo
 import { HiddenVolumeSlider } from "../common/HiddenVolumeSlider";
 import 'animate.css';
 import { useDispatch, useSelector } from "react-redux";
-import { getMusicVolume, setMusicVolume } from "../../../app/store/userPreferences/userPreferencesSlice";
+import { defaultTheme, getMusicVolume, getSelectedTheme, setMusicVolume } from "../../../app/store/userPreferences/userPreferencesSlice";
 import { openExternalLink } from "../../../helpers/openExternalLink";
 
 
@@ -31,6 +31,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ onPause, onPlay, onNex
   const [showSocials, setShowSocials] = useState(false);
   const volume = useSelector(getMusicVolume);
   const dispatch = useDispatch();
+  const appTheme = useSelector(getSelectedTheme) || defaultTheme;
 
   useEffect(() => {
     onVolumeChange(volume);
@@ -110,7 +111,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ onPause, onPlay, onNex
             <button onClick={onNextTrack}><SkipForward size={28} /></button>
           </div>
 
-          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color="#ca3b6b" className="ml-2" />
+          <HiddenVolumeSlider volume={volume} setVolume={handleVolumeChange} color={appTheme.colors.primary} className="ml-2" />
         </div>
       </div>
     </div>

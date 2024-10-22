@@ -29,9 +29,9 @@ export const Main: FC = () => {
   }, []);
 
 
-  if (isInitialLoading) {
-    return <Splashscreen />
-  }
+  //if (isInitialLoading) {
+  //  return <Splashscreen />
+  //}
 
 
   return (

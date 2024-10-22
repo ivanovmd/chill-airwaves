@@ -4,7 +4,7 @@ interface ATCGridSquareProps {
   color?: string;
 }
 
-const ATCGridSquare: React.FC<ATCGridSquareProps> = ({ color = '#2ebbd6' }) => {
+const ATCGridSquare: React.FC<ATCGridSquareProps> = ({ color }) => {
   // Function to create rgba values for shadows
   const getRGBA = (alpha: number) => {
     const r = parseInt(color.slice(1, 3), 16);
