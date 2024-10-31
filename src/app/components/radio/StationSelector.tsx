@@ -79,9 +79,9 @@ export const StationSelector: React.FC<AnimatedTextLineProps> = ({ airportName, 
         <AnimatePresence>
           {showModal && (
             <motion.div
-              initial={{ height: 40, opacity: 0, scale: .9 }}
-              animate={{ height: 'auto', opacity: 1, scale: 1 }}
-              exit={{ height: 40, opacity: 0, scale: .9 }}
+              initial={{ height: 40, opacity: 0, scale: .9, filter: 'blur(5px)' }}
+              animate={{ height: 'auto', opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              exit={{ height: 40, opacity: 0, scale: .9, filter: 'blur(5px)' }}
               className="overflow-hidden absolute top-0 left-0 w-full bg-white z-30 rounded-2xl m-0"
             >
               <div className="text-black">

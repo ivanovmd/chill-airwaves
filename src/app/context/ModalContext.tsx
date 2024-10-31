@@ -53,9 +53,9 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
             <div className='p-10 flex justify-center max-h-full'>
               <motion.div
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.95, opacity: 0 }}
+                initial={{ scale: 0.95, opacity: 0, filter: 'blur(5px)' }}
+                animate={{ scale: 1, opacity: 1, filter: 'blur(0)' }}
+                exit={{ scale: 0.95, opacity: 0, filter: 'blur(5px)' }}
                 transition={{ duration: 0.3 }}
                 className="p-10 rounded-lg relative bg-white w-full flex z-30 max-h-full"
               >
