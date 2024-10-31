@@ -3,6 +3,7 @@ import { AppTheme } from "../userPreferences/userPreferencesSlice";
 
 export interface AppState {
   userEmail: string;
+  appVersion: string;
   isUnlocked: boolean;
   themes: AppTheme[];
 }
