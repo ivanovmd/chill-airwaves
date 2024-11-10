@@ -98,7 +98,6 @@ const createWindow = () => {
 
   ipcMain.handle('getEnv', (_, key: string) => {
     console.log(process.env[key]);
-
     return process.env[key];
   });
 

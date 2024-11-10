@@ -71,7 +71,7 @@ export const SelectAirport: FC<SelectAirportProps> = ({ airports, onSelect }) =>
         onKeyDown={handleKeyDown}
       />
 
-      <div ref={listRef} className="overflow-y-auto">
+      <div ref={listRef} className="overflow-y-auto" style={{ maxHeight: 'calc(400px - 44px)' }}>
         {filteredAirports.map((airport, index) => (
           <div
             key={airport.iata}
