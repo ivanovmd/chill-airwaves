@@ -7,7 +7,7 @@ import { atcProtocolHandler } from './protocols/atcProtocol';
 import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
-import { verifyShare } from './helpers/cerifyShare';
+import { verifyShare } from './helpers/verifyShare';
 
 
 config({ path: '.env' });

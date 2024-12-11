@@ -289,7 +289,7 @@ export const AUDIO_MOTION_ANALYZER_SETTINGS: ConstructorOptions =
   "radial": false,
   "radialInvert": false,
   "radius": 0.3,
-  "reflexAlpha": "1",
+  "reflexAlpha": 1,
   "reflexBright": 1,
   "reflexFit": true,
   "reflexRatio": 0.5,
