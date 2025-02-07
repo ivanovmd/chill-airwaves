@@ -17,6 +17,24 @@ import { Share } from "../modals/Share";
 import { openExternalLink } from "../../../helpers/openExternalLink";
 import { getIsUnlocked } from "../../../app/store/appState/appSlice";
 import { defaultTheme, setSelectedTheme } from "../../../app/store/userPreferences/userPreferencesSlice";
+import BannerAd from "../common/BannerAd";
+
+const AdWrapper = () => {
+  const [adKey, setAdKey] = useState<number>(0);
+
+  useEffect(() => {
+    const getRandomInterval = () => Math.floor(Math.random() * (360000 - 180000) + 180000); // Random between 3-6 minutes in ms
+
+    const interval = setInterval(() => {
+      // Change the key to force remount
+      setAdKey(prev => prev + 1);
+    }, getRandomInterval());
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <BannerAd key={adKey} />;
+};
 
 
 export const Player = () => {
@@ -119,6 +137,8 @@ export const Player = () => {
             <img src="https://img.liveatc.net/LiveATC-400.gif" alt="" className="rounded-md h-5" />
           </a>
         </div>
+
+        <AdWrapper />
       </div>
     </motion.div>
   )
